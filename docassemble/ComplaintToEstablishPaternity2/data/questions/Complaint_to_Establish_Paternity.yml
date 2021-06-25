@@ -156,34 +156,42 @@ continue button field: Complaint_to_Establish_Paternity
 ---
 id: Plaintiff relation to the Child
 question: |
-  Plaintiff relation to the Child
+  Plaintiff relation
 subquestion: |
   Please indicate your relation to the child
 fields:
-  - "Is the mother or father of child born out of wedlock": is_the_mother_or_father_of_child_born_out_of_wedlock_yes
+  - "Are you the mother or father of child born out of wedlock": is_the_mother_or_father_of_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the mother of child born out of wedlock": is_mother_of_child_born_out_of_wedlock_yes
+  - "mother of child born out of wedlock": is_mother_of_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the father of child born out of wedlock": is_father_of_child_born_out_of_wedlock_yes
+    show if: is_the_mother_or_father_of_child_born_out_of_wedlock_yes
+  - "father of child born out of wedlock": is_father_of_child_born_out_of_wedlock_yes
     datatype: yesno
+    show if: is_the_mother_or_father_of_child_born_out_of_wedlock_yes
   - "Is the child born out of wedlock": is_a_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the guardian or custodian of a child born out of wedlock": is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
+  - "Guardian or custodian of a child born out of wedlock": is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the guardian of child born out of wedlock": is_guardian_of_child_born_out_of_wedlock_yes
+  - "Guardian of child born out of wedlock": is_guardian_of_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the custodian of child born out of wedlock": is_custodian_of_child_born_out_of_wedlock_yes
+    show if: is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
+  - "Custodian of child born out of wedlock": is_custodian_of_child_born_out_of_wedlock_yes
     datatype: yesno
+    show if: is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
   - "Is the parent or representative of the parent of the child born out of wedlock": is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the parent of parent of child born out of wedlock": is_parent_of_parent_of_child_born_out_of_wedlock_yes
+  - "Parent of parent of child born out of wedlock": is_parent_of_parent_of_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the representative of parent of child born out of wedlock": is_representative_of_parent_of_child_born_out_of_wedlock_yes
+    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
+  - "Representative of parent of child born out of wedlock": is_representative_of_parent_of_child_born_out_of_wedlock_yes
     datatype: yesno
+    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
   - "User is parent of the mother of child": user_is_parent_of_the_mother_of_child_yes
     datatype: yesno
+    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
   - "User is the parent of father of child": user_is_the_parent_of_father_of_child_yes
     datatype: yesno
+    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
   - "Is the Department of Child and Families": is_department_of_child_and_family_yes
     datatype: yesno
   - "Is an agency licensed under GLC 28a": is_an_agency_licensed_under_glc_28a_yes
@@ -197,62 +205,63 @@ question: |
 subquestion: |
   Please indicate the Defendants/Opposing party's relationship to the child.
 fields:
-  - "Is Defendant mother of child": is_other_party_mother_of_child_yes
+  - "Defendant is mother of child": is_other_party_mother_of_child_yes
     datatype: yesno
-  - "Is Defendant father of child": is_other_party_father_of_child_yes
+  - "Defendant is father of child": is_other_party_father_of_child_yes
     datatype: yesno
 ---
 id: Plaintiff Request that the court
 question: |
-  Plaintiff Request that the court
+  Plaintiff Request
 subquestion: |
-  Please indicate which of the following actions you are requesting from the court in regards to the child.
+  Indicate which of the following actions you are requesting from the court
 fields:
-  - "Is adjudicate Plaintiff or Defendant to be father of child": is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
+  - "Adjudicate Plaintiff or Defendant to be father of child": is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
     datatype: yesno
-  - "Is Plaintiff to be the father of child": is_user_to_be_the_father_of_child_yes
+  - "Plaintiff to be the father of child": is_user_to_be_the_father_of_child_yes
     datatype: yesno
-  - "Is Defendant to be the father of child": is_other_party_to_be_the_father_of_child_yes
+  - "Defendant to be the father of child": is_other_party_to_be_the_father_of_child_yes
     datatype: yesno
-  - "Is to order suitable amount of child support": is_to_order_suitable_amount_of_child_support_yes
+  - "Order suitable amount of child support": is_to_order_suitable_amount_of_child_support_yes
     datatype: yesno
-  - "Is asking order the Plaintiff or other party to maintain or provide insurance": is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
+  - "Order one party to maintain or provide insurance": is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
     datatype: yesno
-  - "Is asking Plaintiff to maintain or provide insurance": is_asking_user_to_maintain_or_provide_insurance_yes
+  - "Ask Plaintiff to maintain or provide insurance": is_asking_user_to_maintain_or_provide_insurance_yes
     datatype: yesno
-  - "Is asking Defendant to provide health insurance": is_asking_other_party_provide_health_insurance_yes
+  - "Ask Defendant to provide health insurance": is_asking_other_party_provide_health_insurance_yes
     datatype: yesno
-  - "Is asking to maintain insurance": is_asking_to_maintain_insurance_yes
+  - "To maintain insurance": is_asking_to_maintain_insurance_yes
     datatype: yesno
-  - "Is asking to provide health insurance": is_asking_to_provide_health_yes
+  - "To provide health insurance": is_asking_to_provide_health_yes
     datatype: yesno
-  - "Is asking to prohibit Defendant from imposing restraint": is_asking_to_prohibit_other_party_from_imposing_restraint_yes
+  - "Prohibit Defendant from imposing restraint": is_asking_to_prohibit_other_party_from_imposing_restraint_yes
     datatype: yesno
-  - "Is asking to prohibit Defendant from imposing restraint on Plaintiff": is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes
+  - "Prohibit Defendant from imposing restraint on Plaintiff": is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes
     datatype: yesno
-  - "Is asking to prohibit Defendant from imposing restraint on child": is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
+  - "Prohibit Defendant from imposing restraint on child": is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
     datatype: yesno
-  - "Is asking grant Plaintiff or Defendant custody": is_asking_grant_user_or_other_party_custody_yes
+  - "Grant one party custody": is_asking_grant_user_or_other_party_custody_yes
     datatype: yesno
-  - "Is asking to grant Plaintiff custody": is_asking_to_grant_user_custody_yes
+  - "Grant Plaintiff custody": is_asking_to_grant_user_custody_yes
     datatype: yesno
-  - "Is asking to grant Defendant custody": is_asking_to_grant_other_party_custody_yes
+  - "Grant Defendant custody": is_asking_to_grant_other_party_custody_yes
     datatype: yesno
-  - "Is asking grant Plaintiff or Defendant parenting time": is_asking_grant_user_or_other_party_parenting_time_yes
+  - "Grant Plaintiff or Defendant parenting time": is_asking_grant_user_or_other_party_parenting_time_yes
     datatype: yesno
-  - "Is asking grant Plaintiff parenting time": is_asking_grant_user_parenting_time_yes
+  - "Grant Plaintiff parenting time": is_asking_grant_user_parenting_time_yes
     datatype: yesno
-  - "Is asking grant Defendant parenting time": is_asking_grant_other_party_parenting_time_yes
+  - "Grant Defendant parenting time": is_asking_grant_other_party_parenting_time_yes
     datatype: yesno
 ---
 id: Attorney use only
 question: |
   Attorney use only
 subquestion: |
-  If you are an attorney please provide your BBO number. If you as the Plaintiff are Pro Se (self-representing), leave blank.
+  If you are an attorney please provide your BBO number. If yoU are Pro Se (self-representing), leave blank.
 fields:
   - "Attorney Board of Bar Overseers": attorney_bbo
     maxlength: 42
+    required: false
 ---
 id: Page number
 question: |
@@ -262,8 +271,10 @@ subquestion: |
 fields:
   - "Page": ResetForm
     datatype: number
+    required: false
   - "Number of Pages": Of
     maxlength: 5
+    required: false
 ---
 id: preview Complaint_to_Establish_Paternity
 question: |
