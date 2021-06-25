@@ -156,34 +156,42 @@ continue button field: Complaint_to_Establish_Paternity
 ---
 id: Plaintiff relation to the Child
 question: |
-  Plaintiff relation to the Child
+  Plaintiff relation
 subquestion: |
   Please indicate your relation to the child
 fields:
-  - "Is the mother or father of child born out of wedlock": is_the_mother_or_father_of_child_born_out_of_wedlock_yes
+  - "Are you the mother or father of child born out of wedlock": is_the_mother_or_father_of_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the mother of child born out of wedlock": is_mother_of_child_born_out_of_wedlock_yes
+  - "mother of child born out of wedlock": is_mother_of_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the father of child born out of wedlock": is_father_of_child_born_out_of_wedlock_yes
+    show if: is_the_mother_or_father_of_child_born_out_of_wedlock_yes
+  - "father of child born out of wedlock": is_father_of_child_born_out_of_wedlock_yes
     datatype: yesno
+    show if: is_the_mother_or_father_of_child_born_out_of_wedlock_yes
   - "Is the child born out of wedlock": is_a_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the guardian or custodian of a child born out of wedlock": is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
+  - "Guardian or custodian of a child born out of wedlock": is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the guardian of child born out of wedlock": is_guardian_of_child_born_out_of_wedlock_yes
+  - "Guardian of child born out of wedlock": is_guardian_of_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the custodian of child born out of wedlock": is_custodian_of_child_born_out_of_wedlock_yes
+    show if: is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
+  - "Custodian of child born out of wedlock": is_custodian_of_child_born_out_of_wedlock_yes
     datatype: yesno
+    show if: is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
   - "Is the parent or representative of the parent of the child born out of wedlock": is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the parent of parent of child born out of wedlock": is_parent_of_parent_of_child_born_out_of_wedlock_yes
+  - "Parent of parent of child born out of wedlock": is_parent_of_parent_of_child_born_out_of_wedlock_yes
     datatype: yesno
-  - "Is the representative of parent of child born out of wedlock": is_representative_of_parent_of_child_born_out_of_wedlock_yes
+    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
+  - "Representative of parent of child born out of wedlock": is_representative_of_parent_of_child_born_out_of_wedlock_yes
     datatype: yesno
+    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
   - "User is parent of the mother of child": user_is_parent_of_the_mother_of_child_yes
     datatype: yesno
+    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
   - "User is the parent of father of child": user_is_the_parent_of_father_of_child_yes
     datatype: yesno
+    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
   - "Is the Department of Child and Families": is_department_of_child_and_family_yes
     datatype: yesno
   - "Is an agency licensed under GLC 28a": is_an_agency_licensed_under_glc_28a_yes
