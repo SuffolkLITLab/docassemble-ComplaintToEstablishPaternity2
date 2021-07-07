@@ -63,7 +63,6 @@ code: |
   user_role = 'plaintiff'
   Complaint_to_Establish_Paternity
   trial_court.division
-  docket_number
   users.gather()
   set_parts(subtitle=str(users))
   users.gather()
@@ -138,7 +137,7 @@ continue button field: Complaint_to_Establish_Paternity_intro
 question: |
   Complaint to Establish Paternity
 subquestion: |
-  This is a form to establish paternity for a child born out of wedlock.
+  This is a form to establish paternity for a child born out of wedlock. 
 ---
 id: Complaint to Establish Paternity
 question: |
@@ -149,7 +148,8 @@ subquestion: |
   - A copy of the child's birth certificate
   - Affidavit of Care and Custody (Form 
     available at the courthouse)
-  Please Note: You must file a separate complaint for each child.
+    
+  Please Note: You must file a separate complaint for EACH child.
   
   As of July 1, 2009 there is a filing fee of $100, plus surcharge ($15) except in cases filed by the IV-D agency.
 continue button field: Complaint_to_Establish_Paternity
@@ -192,12 +192,7 @@ fields:
   - "User is the parent of father of child": user_is_the_parent_of_father_of_child_yes
     datatype: yesno
     show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
-  - "Is the Department of Child and Families": is_department_of_child_and_family_yes
-    datatype: yesno
-  - "Is an agency licensed under GLC 28a": is_an_agency_licensed_under_glc_28a_yes
-    datatype: yesno
-  - "Is the Department of Revenue": is_department_of_revenue_yes
-    datatype: yesno
+
 ---
 id: Defendant Opposing party Relation
 question: |
