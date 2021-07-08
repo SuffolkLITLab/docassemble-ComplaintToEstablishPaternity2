@@ -63,7 +63,6 @@ code: |
   user_role = 'plaintiff'
   Complaint_to_Establish_Paternity
   trial_court.division
-  docket_number
   users.gather()
   set_parts(subtitle=str(users))
   users.gather()
@@ -138,7 +137,7 @@ continue button field: Complaint_to_Establish_Paternity_intro
 question: |
   Complaint to Establish Paternity
 subquestion: |
-  This is a form to establish paternity for a child born out of wedlock.
+  This is a form to establish paternity for a child born out of wedlock. 
 ---
 id: Complaint to Establish Paternity
 question: |
@@ -149,7 +148,8 @@ subquestion: |
   - A copy of the child's birth certificate
   - Affidavit of Care and Custody (Form 
     available at the courthouse)
-  Please Note: You must file a separate complaint for each child.
+    
+  Please Note: You must file a separate complaint for EACH child.
   
   As of July 1, 2009 there is a filing fee of $100, plus surcharge ($15) except in cases filed by the IV-D agency.
 continue button field: Complaint_to_Establish_Paternity
@@ -192,12 +192,7 @@ fields:
   - "User is the parent of father of child": user_is_the_parent_of_father_of_child_yes
     datatype: yesno
     show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
-  - "Is the Department of Child and Families": is_department_of_child_and_family_yes
-    datatype: yesno
-  - "Is an agency licensed under GLC 28a": is_an_agency_licensed_under_glc_28a_yes
-    datatype: yesno
-  - "Is the Department of Revenue": is_department_of_revenue_yes
-    datatype: yesno
+
 ---
 id: Defendant Opposing party Relation
 question: |
@@ -220,38 +215,50 @@ fields:
     datatype: yesno
   - "Plaintiff to be the father of child": is_user_to_be_the_father_of_child_yes
     datatype: yesno
+    show if: is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
   - "Defendant to be the father of child": is_other_party_to_be_the_father_of_child_yes
     datatype: yesno
+    show if: is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
   - "Order suitable amount of child support": is_to_order_suitable_amount_of_child_support_yes
     datatype: yesno
   - "Order one party to maintain or provide insurance": is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
     datatype: yesno
   - "Ask Plaintiff to maintain or provide insurance": is_asking_user_to_maintain_or_provide_insurance_yes
     datatype: yesno
+    show if: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
   - "Ask Defendant to provide health insurance": is_asking_other_party_provide_health_insurance_yes
     datatype: yesno
+    show if: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
   - "To maintain insurance": is_asking_to_maintain_insurance_yes
     datatype: yesno
+    show if: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
   - "To provide health insurance": is_asking_to_provide_health_yes
     datatype: yesno
+    show if: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
   - "Prohibit Defendant from imposing restraint": is_asking_to_prohibit_other_party_from_imposing_restraint_yes
     datatype: yesno
   - "Prohibit Defendant from imposing restraint on Plaintiff": is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes
     datatype: yesno
+    show if: is_asking_to_prohibit_other_party_from_imposing_restraint_yes
   - "Prohibit Defendant from imposing restraint on child": is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
     datatype: yesno
+    show if: is_asking_to_prohibit_other_party_from_imposing_restraint_yes
   - "Grant one party custody": is_asking_grant_user_or_other_party_custody_yes
     datatype: yesno
   - "Grant Plaintiff custody": is_asking_to_grant_user_custody_yes
     datatype: yesno
+    show if: is_asking_grant_user_or_other_party_custody_yes
   - "Grant Defendant custody": is_asking_to_grant_other_party_custody_yes
     datatype: yesno
+    show if: is_asking_grant_user_or_other_party_custody_yes
   - "Grant Plaintiff or Defendant parenting time": is_asking_grant_user_or_other_party_parenting_time_yes
     datatype: yesno
   - "Grant Plaintiff parenting time": is_asking_grant_user_parenting_time_yes
     datatype: yesno
+    show if: is_asking_grant_user_or_other_party_parenting_time_yes
   - "Grant Defendant parenting time": is_asking_grant_other_party_parenting_time_yes
     datatype: yesno
+    show if: is_asking_grant_user_or_other_party_parenting_time_yes
 ---
 id: Attorney use only
 question: |
