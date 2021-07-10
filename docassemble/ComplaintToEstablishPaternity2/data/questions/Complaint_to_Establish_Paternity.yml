@@ -111,7 +111,6 @@ code: |
   user_or_attorney[0].address.address
   set_progress(72.73)
   attorney_bbo
-  ResetForm
   interview_order_Complaint_to_Establish_Paternity = True
 ---
 ###################### Main order ######################
@@ -261,19 +260,6 @@ subquestion: |
 fields:
   - "Attorney Board of Bar Overseers": attorney_bbo
     maxlength: 42
-    required: false
----
-id: Page number
-question: |
-  Page number
-subquestion: |
-  Indicate how many pages will be filed along with the complaint.
-fields:
-  - "Page": ResetForm
-    datatype: number
-    required: false
-  - "Number of Pages": Of
-    maxlength: 5
     required: false
 ---
 id: preview Complaint_to_Establish_Paternity
@@ -444,14 +430,6 @@ review:
     button: |
       **Attorney Board of Bar Overseers**:
       ${ attorney_bbo }
-  - Edit: ResetForm
-    button: |
-      **Page**:
-      ${ ResetForm }
-  - Edit: Of
-    button: |
-      **Number of Pages**:
-      ${ Of }
   - Edit: docket_number
     button: |
       **docket_number**:
@@ -702,8 +680,7 @@ attachments:
       - "is_asking_grant_user_parenting_time_yes": ${ is_asking_grant_user_parenting_time_yes }
       - "is_asking_grant_other_party_parenting_time_yes": ${ is_asking_grant_other_party_parenting_time_yes }
       - "attorney_bbo": ${ attorney_bbo }
-      - "ResetForm": ${ "{:,.2f}".format(ResetForm) }
-      - "Of": ${ Of }
+
   - name: Post interview instructions
     filename: Post-interview-instructions     
     variable name: Post_interview_instructions[i]        
@@ -787,5 +764,3 @@ attachments:
       - "is_asking_grant_user_parenting_time_yes": ${ is_asking_grant_user_parenting_time_yes }
       - "is_asking_grant_other_party_parenting_time_yes": ${ is_asking_grant_other_party_parenting_time_yes }
       - "attorney_bbo": ${ attorney_bbo }
-      - "ResetForm": ${ "{:,.2f}".format(ResetForm) }
-      - "Of": ${ Of }
