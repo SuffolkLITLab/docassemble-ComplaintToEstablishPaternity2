@@ -88,8 +88,8 @@ code: |
   children[0].address.address
   children[0].address.address
   children[0].address.address
-  other_parties.gather()
-  other_parties.gather()
+  other_parties.gather(0)
+  other_parties.gather(0)
   set_progress(45.45)
   other_parties.gather()
   is_other_party_mother_of_child_yes
