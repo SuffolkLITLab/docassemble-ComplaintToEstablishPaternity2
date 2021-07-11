@@ -191,12 +191,6 @@ fields:
   - "User is the parent of father of child": user_is_the_parent_of_father_of_child_yes
     datatype: yesno
     show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
-  - "Is the Department of Child and Families": is_department_of_child_and_family_yes
-    datatype: yesno
-  - "Is an agency licensed under GLC 28a": is_an_agency_licensed_under_glc_28a_yes
-    datatype: yesno
-  - "Is the Department of Revenue": is_department_of_revenue_yes
-    datatype: yesno
 ---
 id: Defendant Opposing party Relation
 question: |
@@ -334,18 +328,6 @@ review:
     button: |
       **User is the parent of father of child**:
       ${ word(yesno(user_is_the_parent_of_father_of_child_yes)) }
-  - Edit: is_department_of_child_and_family_yes
-    button: |
-      **Is the Department of Child and Families**:
-      ${ word(yesno(is_department_of_child_and_family_yes)) }
-  - Edit: is_an_agency_licensed_under_glc_28a_yes
-    button: |
-      **Is an agency licensed under GLC 28a**:
-      ${ word(yesno(is_an_agency_licensed_under_glc_28a_yes)) }
-  - Edit: is_department_of_revenue_yes
-    button: |
-      **Is the Department of Revenue**:
-      ${ word(yesno(is_department_of_revenue_yes)) }
   - Edit: is_other_party_mother_of_child_yes
     button: |
       **Is Defendant mother of child**:
@@ -656,9 +638,6 @@ attachments:
       - "is_representative_of_parent_of_child_born_out_of_wedlock_yes": ${ is_representative_of_parent_of_child_born_out_of_wedlock_yes }
       - "user_is_parent_of_the_mother_of_child_yes": ${ user_is_parent_of_the_mother_of_child_yes }
       - "user_is_the_parent_of_father_of_child_yes": ${ user_is_the_parent_of_father_of_child_yes }
-      - "is_department_of_child_and_family_yes": ${ is_department_of_child_and_family_yes }
-      - "is_an_agency_licensed_under_glc_28a_yes": ${ is_an_agency_licensed_under_glc_28a_yes }
-      - "is_department_of_revenue_yes": ${ is_department_of_revenue_yes }
       - "is_other_party_mother_of_child_yes": ${ is_other_party_mother_of_child_yes }
       - "is_other_party_father_of_child_yes": ${ is_other_party_father_of_child_yes }
       - "is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes": ${ is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes }
@@ -740,9 +719,6 @@ attachments:
       - "is_representative_of_parent_of_child_born_out_of_wedlock_yes": ${ is_representative_of_parent_of_child_born_out_of_wedlock_yes }
       - "user_is_parent_of_the_mother_of_child_yes": ${ user_is_parent_of_the_mother_of_child_yes }
       - "user_is_the_parent_of_father_of_child_yes": ${ user_is_the_parent_of_father_of_child_yes }
-      - "is_department_of_child_and_family_yes": ${ is_department_of_child_and_family_yes }
-      - "is_an_agency_licensed_under_glc_28a_yes": ${ is_an_agency_licensed_under_glc_28a_yes }
-      - "is_department_of_revenue_yes": ${ is_department_of_revenue_yes }
       - "is_other_party_mother_of_child_yes": ${ is_other_party_mother_of_child_yes }
       - "is_other_party_father_of_child_yes": ${ is_other_party_father_of_child_yes }
       - "is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes": ${ is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes }
