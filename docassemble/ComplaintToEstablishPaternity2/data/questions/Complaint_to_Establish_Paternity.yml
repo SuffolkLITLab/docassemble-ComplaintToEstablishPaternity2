@@ -60,7 +60,7 @@ code: |
   # Set the allowed courts for this interview
   allowed_courts = interview_metadata["Complaint_to_Establish_Paternity"]["allowed courts"]
   nav.set_section('review_Complaint_to_Establish_Paternity')
-  user_role = 'plaintiff'
+  user_ask_role = 'plaintiff'
   Complaint_to_Establish_Paternity
   trial_court.division
   users.gather()
