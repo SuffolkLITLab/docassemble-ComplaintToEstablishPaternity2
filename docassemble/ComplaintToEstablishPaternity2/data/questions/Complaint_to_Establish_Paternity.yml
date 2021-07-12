@@ -60,7 +60,7 @@ code: |
   # Set the allowed courts for this interview
   allowed_courts = interview_metadata["Complaint_to_Establish_Paternity"]["allowed courts"]
   nav.set_section('review_Complaint_to_Establish_Paternity')
-  user_role = 'plaintiff'
+  user_ask_role = 'plaintiff'
   Complaint_to_Establish_Paternity
   trial_court.division
   users.gather()
@@ -110,7 +110,6 @@ code: |
   user_or_attorney[0].address.address
   set_progress(72.73)
   attorney_bbo
-  ResetForm
   interview_order_Complaint_to_Establish_Paternity = True
 ---
 ###################### Main order ######################
@@ -121,6 +120,8 @@ mandatory: True
 code: |
   al_intro_screen
   Complaint_to_Establish_Paternity_intro
+  Complaint_to_Establish_Paternity_intro_2
+  Married_after
   interview_order_Complaint_to_Establish_Paternity
   signature_date
   # Save anonymized interview statistics (customize the saved data below)
@@ -138,6 +139,20 @@ question: |
   Complaint to Establish Paternity
 subquestion: |
   This is a form to establish paternity for a child born out of wedlock. 
+---
+comment: |
+  This question is used to introduce your interview. Please customize
+id: Complaint_to_Establish_Paternity_2
+continue button field: Complaint_to_Establish_Paternity_intro_2
+question: |
+  Married?
+---
+comment: |
+  This question is used to introduce your interview. Please customize
+id: Married_after_id
+continue button field: Married_after
+question: |
+  married after 365 days?
 ---
 id: Complaint to Establish Paternity
 question: |
@@ -191,8 +206,7 @@ fields:
     show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
   - "User is the parent of father of child": user_is_the_parent_of_father_of_child_yes
     datatype: yesno
-    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
-
+    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_
 ---
 id: Defendant Opposing party Relation
 question: |
@@ -270,19 +284,6 @@ fields:
     maxlength: 42
     required: false
 ---
-id: Page number
-question: |
-  Page number
-subquestion: |
-  Indicate how many pages will be filed along with the complaint.
-fields:
-  - "Page": ResetForm
-    datatype: number
-    required: false
-  - "Number of Pages": Of
-    maxlength: 5
-    required: false
----
 id: preview Complaint_to_Establish_Paternity
 question: |
   Preview your form before you sign it
@@ -355,18 +356,6 @@ review:
     button: |
       **User is the parent of father of child**:
       ${ word(yesno(user_is_the_parent_of_father_of_child_yes)) }
-  - Edit: is_department_of_child_and_family_yes
-    button: |
-      **Is the Department of Child and Families**:
-      ${ word(yesno(is_department_of_child_and_family_yes)) }
-  - Edit: is_an_agency_licensed_under_glc_28a_yes
-    button: |
-      **Is an agency licensed under GLC 28a**:
-      ${ word(yesno(is_an_agency_licensed_under_glc_28a_yes)) }
-  - Edit: is_department_of_revenue_yes
-    button: |
-      **Is the Department of Revenue**:
-      ${ word(yesno(is_department_of_revenue_yes)) }
   - Edit: is_other_party_mother_of_child_yes
     button: |
       **Is Defendant mother of child**:
@@ -451,14 +440,6 @@ review:
     button: |
       **Attorney Board of Bar Overseers**:
       ${ attorney_bbo }
-  - Edit: ResetForm
-    button: |
-      **Page**:
-      ${ ResetForm }
-  - Edit: Of
-    button: |
-      **Number of Pages**:
-      ${ Of }
   - Edit: docket_number
     button: |
       **docket_number**:
@@ -685,9 +666,6 @@ attachments:
       - "is_representative_of_parent_of_child_born_out_of_wedlock_yes": ${ is_representative_of_parent_of_child_born_out_of_wedlock_yes }
       - "user_is_parent_of_the_mother_of_child_yes": ${ user_is_parent_of_the_mother_of_child_yes }
       - "user_is_the_parent_of_father_of_child_yes": ${ user_is_the_parent_of_father_of_child_yes }
-      - "is_department_of_child_and_family_yes": ${ is_department_of_child_and_family_yes }
-      - "is_an_agency_licensed_under_glc_28a_yes": ${ is_an_agency_licensed_under_glc_28a_yes }
-      - "is_department_of_revenue_yes": ${ is_department_of_revenue_yes }
       - "is_other_party_mother_of_child_yes": ${ is_other_party_mother_of_child_yes }
       - "is_other_party_father_of_child_yes": ${ is_other_party_father_of_child_yes }
       - "is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes": ${ is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes }
@@ -709,8 +687,7 @@ attachments:
       - "is_asking_grant_user_parenting_time_yes": ${ is_asking_grant_user_parenting_time_yes }
       - "is_asking_grant_other_party_parenting_time_yes": ${ is_asking_grant_other_party_parenting_time_yes }
       - "attorney_bbo": ${ attorney_bbo }
-      - "ResetForm": ${ "{:,.2f}".format(ResetForm) }
-      - "Of": ${ Of }
+
   - name: Post interview instructions
     filename: Post-interview-instructions     
     variable name: Post_interview_instructions[i]        
@@ -770,9 +747,6 @@ attachments:
       - "is_representative_of_parent_of_child_born_out_of_wedlock_yes": ${ is_representative_of_parent_of_child_born_out_of_wedlock_yes }
       - "user_is_parent_of_the_mother_of_child_yes": ${ user_is_parent_of_the_mother_of_child_yes }
       - "user_is_the_parent_of_father_of_child_yes": ${ user_is_the_parent_of_father_of_child_yes }
-      - "is_department_of_child_and_family_yes": ${ is_department_of_child_and_family_yes }
-      - "is_an_agency_licensed_under_glc_28a_yes": ${ is_an_agency_licensed_under_glc_28a_yes }
-      - "is_department_of_revenue_yes": ${ is_department_of_revenue_yes }
       - "is_other_party_mother_of_child_yes": ${ is_other_party_mother_of_child_yes }
       - "is_other_party_father_of_child_yes": ${ is_other_party_father_of_child_yes }
       - "is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes": ${ is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes }
@@ -794,5 +768,3 @@ attachments:
       - "is_asking_grant_user_parenting_time_yes": ${ is_asking_grant_user_parenting_time_yes }
       - "is_asking_grant_other_party_parenting_time_yes": ${ is_asking_grant_other_party_parenting_time_yes }
       - "attorney_bbo": ${ attorney_bbo }
-      - "ResetForm": ${ "{:,.2f}".format(ResetForm) }
-      - "Of": ${ Of }
