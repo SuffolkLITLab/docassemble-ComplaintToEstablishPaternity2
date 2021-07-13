@@ -122,6 +122,7 @@ code: |
   Complaint_to_Establish_Paternity_intro
   Complaint_to_Establish_Paternity_intro_2
   Married_after
+  Affidavit_of_indigencey
   interview_order_Complaint_to_Establish_Paternity
   signature_date
   # Save anonymized interview statistics (customize the saved data below)
@@ -182,6 +183,14 @@ subquestion: |
   
   As of July 1, 2009 there is a filing fee of $100, plus surcharge ($15) except in cases filed by the IV-D agency.
 continue button field: Complaint_to_Establish_Paternity
+---
+id: Affidavit_form
+continue button field: Affidavit_of_indigencey
+question: |
+ Please refer to the following link to get the Affidavit of indigencey form (to waive court fee's).
+subquestion: |
+ The court can also waive or ask the state to pay for “extra” fees. You must fill out a form called an Affidavit of Indigency. This form tells the court you cannot afford the fees related to your case. If the clerk or a judge approves the form, you will not have to pay. 
+ 
 ---
 id: Plaintiff relation to the Child
 question: |
