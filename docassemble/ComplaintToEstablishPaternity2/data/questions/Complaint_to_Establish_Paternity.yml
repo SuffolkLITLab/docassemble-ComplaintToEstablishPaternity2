@@ -47,7 +47,9 @@ code: |
 ---
 objects:
   - user_or_attorney: ALPeopleList.using(ask_number=True,target_number=1)
-  - users: ALPeopleList.using(there_are_any=True)
+  - users: ALPeopleList.using(there_are_any=True,target_number=1,ask_number=True)
+  - other_parties: ALPeopleList.using(there_are_any=True,target_number=1,ask_number=True)
+  - children: ALPeopleList.using(there_are_any=True,target_number=1,ask_number=True)
 ---
 sections:
   - review_Complaint_to_Establish_Paternity: Review your answers
