@@ -187,10 +187,10 @@ continue button field: Complaint_to_Establish_Paternity
 id: Affidavit_form
 continue button field: Affidavit_of_indigencey
 question: |
- Please refer to the following link to get the Affidavit of indigencey form (to waive court fee's).
+ Waiving your court fee's.
 subquestion: |
- The court can also waive or ask the state to pay for “extra” fees. You must fill out a form called an Affidavit of Indigency. This form tells the court you cannot afford the fees related to your case. If the clerk or a judge approves the form, you will not have to pay. 
- 
+ The court can also waive or ask the state to pay for “extra” fees. You must fill out a form called an Affidavit of Indigency. This form tells the court you cannot afford the fees related to your case. If the clerk or a judge approves the form, you will not have to pay.
+  url = https://www.masslegalhelp.org/housing/forms/indigency-affidavit
 ---
 id: Plaintiff relation to the Child
 question: |
