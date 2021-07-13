@@ -159,7 +159,14 @@ comment: |
 id: Married_after_id
 continue button field: Married_after
 question: |
-  married after 365 days?
+  This is a screening question to determine if you are filling out the correct form.
+subquestion: |
+  Was the mother of the child NOT married at time of child birth AND was NOT married within 300 days before the childs birth.
+fields: 
+ - "The mother of the child was not married at the time of the child's birth and was not married within three hundred days before the birth of the child.": mother_not_married_after_birth
+   datatype: yesnoradio
+ - "STOP, this is the incorrect form. Please re-direct to the following link.": stop_redirect_to_link
+   show if: mother_not_married_after_birth 
 ---
 id: Complaint to Establish Paternity
 question: |
