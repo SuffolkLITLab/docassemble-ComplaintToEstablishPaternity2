@@ -88,8 +88,8 @@ code: |
   children[0].address.address
   children[0].address.address
   children[0].address.address
-  other_parties.gather()
-  other_parties.gather()
+  other_parties.gather(0)
+  other_parties.gather(0)
   set_progress(45.45)
   other_parties.gather()
   is_other_party_mother_of_child_yes
@@ -120,6 +120,8 @@ mandatory: True
 code: |
   al_intro_screen
   Complaint_to_Establish_Paternity_intro
+  Complaint_to_Establish_Paternity_intro_2
+  Married_after
   interview_order_Complaint_to_Establish_Paternity
   signature_date
   # Save anonymized interview statistics (customize the saved data below)
@@ -137,6 +139,27 @@ question: |
   Complaint to Establish Paternity
 subquestion: |
   This is a form to establish paternity for a child born out of wedlock. 
+---
+comment: |
+  This question is used to introduce your interview. Please customize
+id: Complaint_to_Establish_Paternity_2
+continue button field: Complaint_to_Establish_Paternity_intro_2
+question: |
+  This screen is to determine whether or not you are filling out the correct form.
+subquestion: |
+  Are the Plaintiff and Defendant married?
+fields:
+ - "Plaintiff and Defendant are married.": plaintiff_married_defendant
+   datatype: yesnoradio
+ - "STOP, this is the incorrect form. Please re-direct to the following link.": stop_redirect_to_link
+   show if: plaintiff_married_defendant 
+---
+comment: |
+  This question is used to introduce your interview. Please customize
+id: Married_after_id
+continue button field: Married_after
+question: |
+  married after 365 days?
 ---
 id: Complaint to Establish Paternity
 question: |
