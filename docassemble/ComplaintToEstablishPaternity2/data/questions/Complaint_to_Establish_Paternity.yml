@@ -141,7 +141,9 @@ continue button field: Complaint_to_Establish_Paternity_intro
 question: |
   Complaint to Establish Paternity
 subquestion: |
-  This is a form to establish paternity for a child born out of wedlock. 
+  This is a form to establish paternity for a child born out of wedlock.
+under: |
+  Note: "Paternity" means that there is a legal relationship between a father and his child. 
 ---
 comment: |
   This question is used to introduce your interview. Please customize
