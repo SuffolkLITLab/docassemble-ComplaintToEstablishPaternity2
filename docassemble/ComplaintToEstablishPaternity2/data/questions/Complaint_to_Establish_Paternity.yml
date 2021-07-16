@@ -47,7 +47,9 @@ code: |
 ---
 objects:
   - user_or_attorney: ALPeopleList.using(ask_number=True,target_number=1)
-  - users: ALPeopleList.using(there_are_any=True)
+  - users: ALPeopleList.using(there_are_any=True,target_number=1,ask_number=True)
+  - other_parties: ALPeopleList.using(there_are_any=True,target_number=1,ask_number=True)
+  - children: ALPeopleList.using(there_are_any=True,target_number=1,ask_number=True)
 ---
 sections:
   - review_Complaint_to_Establish_Paternity: Review your answers
@@ -139,7 +141,9 @@ continue button field: Complaint_to_Establish_Paternity_intro
 question: |
   Complaint to Establish Paternity
 subquestion: |
-  This is a form to establish paternity for a child born out of wedlock. 
+  This is a form to establish paternity for a child born out of wedlock.
+under: |
+  Note: "Paternity" means that there is a legal relationship between a father and his child. 
 ---
 comment: |
   This question is used to introduce your interview. Please customize
@@ -190,7 +194,7 @@ question: |
  Waiving your court fee's.
 subquestion: |
  The court can also waive or ask the state to pay for “extra” fees. You must fill out a form called an Affidavit of Indigency. This form tells the court you cannot afford the fees related to your case. If the clerk or a judge approves the form, you will not have to pay.
-  url = https://www.masslegalhelp.org/housing/forms/indigency-affidavit
+  Please refer to the following link (it will re-direct you the MassLegalHelp page that has the information of a fee form waiver). [Affidavit of Indigency](https://www.masslegalhelp.org/housing/forms/indigency-affidavit)
 ---
 id: Plaintiff relation to the Child
 question: |
