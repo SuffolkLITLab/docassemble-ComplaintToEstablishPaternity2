@@ -153,11 +153,10 @@ question: |
   This screen is to determine whether or not you are filling out the correct form.
 subquestion: |
   Are the Plaintiff and Defendant married?
-fields:
- - "Plaintiff and Defendant are married.": plaintiff_married_defendant
-   datatype: yesnoradio
- - "STOP, this is the incorrect form. Please re-direct to the following link.": stop_redirect_to_link
-   show if: plaintiff_married_defendant 
+field: plaintiff_married_defendant
+choices:
+  - Plaintiff and Defendant ARE married
+  - Plaintiff and Defendant ARE NOT married
 ---
 comment: |
   This question is used to introduce your interview. Please customize
@@ -166,12 +165,12 @@ continue button field: Married_after
 question: |
   This is a screening question to determine if you are filling out the correct form.
 subquestion: |
-  Was the mother of the child NOT married at time of child birth AND was NOT married within 300 days before the childs birth.
-fields: 
- - "The mother of the child was not married at the time of the child's birth and was not married within three hundred days before the birth of the child.": mother_not_married_after_birth
-   datatype: yesnoradio
- - "STOP, this is the incorrect form. Please re-direct to the following link.": stop_redirect_to_link
-   show if: mother_not_married_after_birth 
+  Was the mother of the child married at time of child birth AND/OR married within 300 days before the childs birth.
+field: mother_not_married_after_birth
+choices:
+ - Mother was NOT married at the time of birth and/or not married 300 days before childs birth. 
+ - Mother WAS married at the time of birth and/or married 300 days before childs birth. 
+
 ---
 id: Complaint to Establish Paternity
 question: |
