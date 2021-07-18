@@ -304,7 +304,7 @@ id: Attorney use only
 question: |
   Attorney use only
 subquestion: |
-  If you are an attorney please provide your BBO number. If yoU are Pro Se (self-representing), leave blank.
+  If you are an attorney please provide your BBO number. If you are Pro Se (self-representing), leave blank.
 fields:
   - "Attorney Board of Bar Overseers": attorney_bbo
     maxlength: 42
