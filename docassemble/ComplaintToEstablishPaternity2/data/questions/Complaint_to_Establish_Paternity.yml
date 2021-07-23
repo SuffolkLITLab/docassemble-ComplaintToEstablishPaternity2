@@ -106,10 +106,6 @@ code: |
   user_or_attorney.gather()
   set_progress(63.64)
   user_or_attorney[0].address.address
-  user_or_attorney[0].address.address
-  user_or_attorney[0].address.address
-  user_or_attorney[0].address.address
-  user_or_attorney[0].address.address
   set_progress(72.73)
   attorney_bbo
   interview_order_Complaint_to_Establish_Paternity = True
@@ -233,6 +229,16 @@ fields:
   - "User is the parent of father of child": user_is_the_parent_of_father_of_child_yes
     datatype: yesno
     show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_
+---
+sets:
+  - other_parties[i].name.first
+  - other_parties[i].name.last
+id: opposing party name
+question:  |
+  What is the defendant's name?
+fields:
+  - code: |
+      other_parties[i].name_fields()
 ---
 id: Defendant Opposing party Relation
 question: |
