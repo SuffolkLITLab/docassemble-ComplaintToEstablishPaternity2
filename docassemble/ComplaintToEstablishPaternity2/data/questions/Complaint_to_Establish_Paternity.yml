@@ -102,12 +102,13 @@ code: |
   other_parties[0].address.address
   other_parties[0].address.address
   signature_date
-  user_or_attorney[0].phone_number
-  user_or_attorney.gather()
+  if pro_se_or_atty == 'attorney':
+    user_or_attorney.gather()
+    user_or_attorney[0].address.address
+    attorney_bbo
+    user_or_attorney[0].phone_number
   set_progress(63.64)
-  user_or_attorney[0].address.address
   set_progress(72.73)
-  attorney_bbo
   interview_order_Complaint_to_Establish_Paternity = True
 ---
 ###################### Main order ######################
@@ -306,11 +307,19 @@ fields:
     datatype: yesno
     show if: is_asking_grant_user_or_other_party_parenting_time_yes
 ---
+id: pro se or atty
+question: | 
+  Are you representing yourself or do you have an attorney representing you? 
+field: pro_se_or_atty
+choices:
+  - I am representing myself: prose
+  - An attorney is representing me: attorney
+---
 id: Attorney use only
 question: |
   Attorney use only
 subquestion: |
-  If you are an attorney please provide your BBO number. If yoU are Pro Se (self-representing), leave blank.
+  If you are an attorney please provide your BBO number. If you are Pro Se (self-representing), leave blank.
 fields:
   - "Attorney Board of Bar Overseers": attorney_bbo
     maxlength: 42
@@ -323,7 +332,13 @@ subquestion: |
   Here is a preview of the form you will sign on the next page.   
   
   ${ al_court_bundle.as_pdf(key='preview') }
-
+  
+  
+  
+  ${ user_or_attorney[0] if pro_se_or_atty == 'attorney' else users[0].name }
+  
+  
+  
   Click the image to open it in a new tab. Click the "Make changes" button
   to edit your answers.
 
@@ -678,94 +693,46 @@ attachments:
       - "other_party_address_state": ${ other_parties[0].address.state }
       - "other_party_address_zip": ${ other_parties[0].address.zip }
       - "signature_date": ${ signature_date }
-      - "user_or_attorney_address_unit": ${ user_or_attorney[0].address.unit }
-      - "user_or_attorney_phone_number": ${ user_or_attorney[0].phone_number }
-      - "user_or_attorney_name": ${ user_or_attorney[0] }
-      - "user_or_attorney_address_city": ${ user_or_attorney[0].address.city }
-      - "user_or_attorney_address_zip": ${ user_or_attorney[0].address.zip }
-      - "user_or_attorney_address_state": ${ user_or_attorney[0].address.state }
-      - "user_or_attorney_address_street": ${ user_or_attorney[0].address.address }
-      - "user_or_attorney_signature": ${ user_or_attorney[0].signature_if_final(i) }
-      - "is_the_mother_or_father_of_child_born_out_of_wedlock_yes": ${ is_the_mother_or_father_of_child_born_out_of_wedlock_yes }
-      - "is_mother_of_child_born_out_of_wedlock_yes": ${ is_mother_of_child_born_out_of_wedlock_yes }
-      - "is_father_of_child_born_out_of_wedlock_yes": ${ is_father_of_child_born_out_of_wedlock_yes }
-      - "is_a_child_born_out_of_wedlock_yes": ${ is_a_child_born_out_of_wedlock_yes }
-      - "is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes": ${ is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes }
-      - "is_guardian_of_child_born_out_of_wedlock_yes": ${ is_guardian_of_child_born_out_of_wedlock_yes }
-      - "is_custodian_of_child_born_out_of_wedlock_yes": ${ is_custodian_of_child_born_out_of_wedlock_yes }
-      - "is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes": ${ is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes }
-      - "is_parent_of_parent_of_child_born_out_of_wedlock_yes": ${ is_parent_of_parent_of_child_born_out_of_wedlock_yes }
-      - "is_representative_of_parent_of_child_born_out_of_wedlock_yes": ${ is_representative_of_parent_of_child_born_out_of_wedlock_yes }
-      - "user_is_parent_of_the_mother_of_child_yes": ${ user_is_parent_of_the_mother_of_child_yes }
-      - "user_is_the_parent_of_father_of_child_yes": ${ user_is_the_parent_of_father_of_child_yes }
-      - "is_other_party_mother_of_child_yes": ${ is_other_party_mother_of_child_yes }
-      - "is_other_party_father_of_child_yes": ${ is_other_party_father_of_child_yes }
-      - "is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes": ${ is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes }
-      - "is_user_to_be_the_father_of_child_yes": ${ is_user_to_be_the_father_of_child_yes }
-      - "is_other_party_to_be_the_father_of_child_yes": ${ is_other_party_to_be_the_father_of_child_yes }
-      - "is_to_order_suitable_amount_of_child_support_yes": ${ is_to_order_suitable_amount_of_child_support_yes }
-      - "is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes": ${ is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes }
-      - "is_asking_user_to_maintain_or_provide_insurance_yes": ${ is_asking_user_to_maintain_or_provide_insurance_yes }
-      - "is_asking_other_party_provide_health_insurance_yes": ${ is_asking_other_party_provide_health_insurance_yes }
-      - "is_asking_to_maintain_insurance_yes": ${ is_asking_to_maintain_insurance_yes }
-      - "is_asking_to_provide_health_yes": ${ is_asking_to_provide_health_yes }
-      - "is_asking_to_prohibit_other_party_from_imposing_restraint_yes": ${ is_asking_to_prohibit_other_party_from_imposing_restraint_yes }
-      - "is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes": ${ is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes }
-      - "is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes": ${ is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes }
-      - "is_asking_grant_user_or_other_party_custody_yes": ${ is_asking_grant_user_or_other_party_custody_yes }
-      - "is_asking_to_grant_user_custody_yes": ${ is_asking_to_grant_user_custody_yes }
-      - "is_asking_to_grant_other_party_custody_yes": ${ is_asking_to_grant_other_party_custody_yes }
-      - "is_asking_grant_user_or_other_party_parenting_time_yes": ${ is_asking_grant_user_or_other_party_parenting_time_yes }
-      - "is_asking_grant_user_parenting_time_yes": ${ is_asking_grant_user_parenting_time_yes }
-      - "is_asking_grant_other_party_parenting_time_yes": ${ is_asking_grant_other_party_parenting_time_yes }
-      - "attorney_bbo": ${ attorney_bbo }
-
-  - name: Post interview instructions
-    filename: Post-interview-instructions     
-    variable name: Post_interview_instructions[i]        
-    docx template file: Complaint_to_Establish_Paternity_next_steps.docx
-  - name: Complaint to Establish Paternity attachment
-    filename: Complaint_to_Establish_Paternity     
-    variable name: Complaint_to_Establish_Paternity_attachment[i]        
-    skip undefined: True
-    pdf template file: Complaint_to_Establish_Paternity.pdf
-    fields:
-      - "docket_number": ${ docket_number }
-      - "user_name_first": ${ users[0].name.first }
-      - "user_name_middle_initial": ${ users[0].name.middle_initial() }
-      - "user_name_last": ${ users[0].name.last }
-      - "trial_court_division": ${ trial_court.division }
-      - "other_party_name_first": ${ other_parties[0].name.first }
-      - "other_party_name_middle_initial": ${ other_parties[0].name.middle_initial() }
-      - "other_party_name_last": ${ other_parties[0].name.last }
-      - "user_address_street": ${ users[0].address.address }
-      - "user_address_unit": ${ users[0].address.unit }
-      - "user_address_city": ${ users[0].address.city }
-      - "user_address_state": ${ users[0].address.state }
-      - "user_address_zip": ${ users[0].address.zip }
-      - "child_name_first": ${ children[0].name.first }
-      - "child_name_middle_initial": ${ children[0].name.middle_initial() }
-      - "child_name_last": ${ children[0].name.last }
-      - "child_age": ${ children[0].age_in_years() }
-      - "child_birthdate": ${ children[0].birthdate.format() }
-      - "child_address_city": ${ children[0].address.city }
-      - "child_address_street": ${ children[0].address.address }
-      - "child_address_unit": ${ children[0].address.unit }
-      - "child_address_state": ${ children[0].address.state }
-      - "child_address_zip": ${ children[0].address.zip }
-      - "other_party_address_street": ${ other_parties[0].address.address }
-      - "other_party_address_unit": ${ other_parties[0].address.unit }
-      - "other_party_address_city": ${ other_parties[0].address.city }
-      - "other_party_address_state": ${ other_parties[0].address.state }
-      - "other_party_address_zip": ${ other_parties[0].address.zip }
-      - "signature_date": ${ signature_date }
-      - "user_or_attorney_address_unit": ${ user_or_attorney[0].address.unit }
-      - "user_or_attorney_phone_number": ${ user_or_attorney[0].phone_number }
-      - "user_or_attorney_name": ${ user_or_attorney[0] }
-      - "user_or_attorney_address_city": ${ user_or_attorney[0].address.city }
-      - "user_or_attorney_address_zip": ${ user_or_attorney[0].address.zip }
-      - "user_or_attorney_address_state": ${ user_or_attorney[0].address.state }
-      - "user_or_attorney_address_street": ${ user_or_attorney[0].address.address }
+      - "user_or_attorney_address_unit": |
+          % if pro_se_or_atty == 'attorney': 
+          ${ user_or_attorney[0].address.unit }
+          % else:
+          ${ users[0].address.unit }
+          % endif
+      - "user_or_attorney_phone_number": |
+          % if pro_se_or_atty == 'attorney': 
+          ${ user_or_attorney[0].phone_number }
+          % endif
+      - "user_or_attorney_name": |
+          % if pro_se_or_atty == 'attorney': 
+          ${ user_or_attorney[0] }
+          % else:
+          ${ users[0].name }
+          % endif
+      - "user_or_attorney_address_city": |
+          % if pro_se_or_atty == 'attorney': 
+          ${ user_or_attorney[0].address.city }
+          % else:
+          ${ users[0].address.city }
+          % endif
+      - "user_or_attorney_address_zip": |
+          % if pro_se_or_atty == 'attorney': 
+          ${ user_or_attorney[0].address.zip }
+          % else:
+          ${ users[0].address.zip }
+          % endif
+      - "user_or_attorney_address_state": |
+          % if pro_se_or_atty == 'attorney': 
+          ${ user_or_attorney[0].address.state }
+          % else:
+          ${ users[0].address.state }
+          % endif
+      - "user_or_attorney_address_street": |
+          % if pro_se_or_atty == 'attorney': 
+          ${ user_or_attorney[0].address.address }
+          % else:
+          ${ users[0].address.address }
+          % endif
       - "user_or_attorney_signature": ${ user_or_attorney[0].signature_if_final(i) }
       - "is_the_mother_or_father_of_child_born_out_of_wedlock_yes": ${ is_the_mother_or_father_of_child_born_out_of_wedlock_yes }
       - "is_mother_of_child_born_out_of_wedlock_yes": ${ is_mother_of_child_born_out_of_wedlock_yes }
