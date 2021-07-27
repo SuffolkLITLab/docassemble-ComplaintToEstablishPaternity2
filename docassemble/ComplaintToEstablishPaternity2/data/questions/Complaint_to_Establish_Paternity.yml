@@ -130,21 +130,17 @@ comment: |
 id: Complaint_to_Establish_Paternity_2
 continue button field: Complaint_to_Establish_Paternity_intro_2
 question: |
-  This screen is to determine whether or not you are filling out the correct form.
-subquestion: |
   Are the Plaintiff and Defendant married?
 field: plaintiff_married_defendant
 choices:
-  - Plaintiff and Defendant ARE married
-  - Plaintiff and Defendant ARE NOT married
+  - Yes
+  - No
 ---
 comment: |
   This question is used to introduce your interview. Please customize
 id: Married_after_id
 continue button field: Married_after
 question: |
-  This is a screening question to determine if you are filling out the correct form.
-subquestion: |
   Was the mother of the child married at time of child birth AND/OR married within 300 days before the childs birth.
 field: mother_not_married_after_birth
 choices:
