@@ -112,6 +112,10 @@ code: |
   user_or_attorney[0].signature
   Complaint_to_Establish_Paternity_download
 ---
+terms: 
+  paternity: |
+    Paternity means that there is a legal relationship between a father and his child. 
+---
 comment: |
   This question is used to introduce your interview. Please customize
 id: Complaint_to_Establish_Paternity
@@ -119,9 +123,7 @@ continue button field: Complaint_to_Establish_Paternity_intro
 question: |
   Complaint to Establish Paternity
 subquestion: |
-  This is a form to establish paternity for a child born out of wedlock.
-under: |
-  Note: "Paternity" means that there is a legal relationship between a father and his child. 
+  This is a form to establish {paternity} for a child born out of wedlock.
 ---
 comment: |
   This question is used to introduce your interview. Please customize
