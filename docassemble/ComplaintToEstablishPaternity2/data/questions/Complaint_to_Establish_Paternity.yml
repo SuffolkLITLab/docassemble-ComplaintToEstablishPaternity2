@@ -101,7 +101,8 @@ code: |
   al_intro_screen
   Complaint_to_Establish_Paternity_intro
   Complaint_to_Establish_Paternity_intro_2
-  Married_after
+  Married_at_time
+  married_300_days_before
   Affidavit_of_indigencey
   interview_order_Complaint_to_Establish_Paternity
   signature_date
@@ -130,27 +131,33 @@ comment: |
 id: Complaint_to_Establish_Paternity_2
 continue button field: Complaint_to_Establish_Paternity_intro_2
 question: |
-  This screen is to determine whether or not you are filling out the correct form.
-subquestion: |
-  Are the Plaintiff and Defendant married?
+  Are the Plaintiff and Defendant currently married?
 field: plaintiff_married_defendant
 choices:
-  - Plaintiff and Defendant ARE married
-  - Plaintiff and Defendant ARE NOT married
+  - Yes
+  - No
 ---
 comment: |
   This question is used to introduce your interview. Please customize
-id: Married_after_id
-continue button field: Married_after
+id: Married_at_time_id
+continue button field: Married_at_time
 question: |
-  This is a screening question to determine if you are filling out the correct form.
-subquestion: |
-  Was the mother of the child married at time of child birth AND/OR married within 300 days before the childs birth.
-field: mother_not_married_after_birth
+  Was the mother married at time of child birth?
+field: mother_not_married_at_birth
 choices:
- - Mother was NOT married at the time of birth and/or not married 300 days before childs birth. 
- - Mother WAS married at the time of birth and/or married 300 days before childs birth. 
-
+ - Yes
+ - No
+--- 
+comment: |
+  This question is used to introduce your interview. Please customize
+id: married_300_days_before_id
+continue button field: married_300_days_before
+question: |
+  Was the mother of the child married within 300 days before the childs birth?
+field: married_300_days_before_not
+choices:
+ - Yes
+ - No
 ---
 id: Complaint to Establish Paternity
 question: |
