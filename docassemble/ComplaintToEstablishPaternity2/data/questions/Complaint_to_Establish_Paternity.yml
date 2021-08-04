@@ -64,6 +64,14 @@ code: |
   nav.set_section('review_Complaint_to_Establish_Paternity')
   user_ask_role = 'plaintiff'
   Complaint_to_Establish_Paternity
+  are_parties_currently_married
+  if are_parties_currently_married == True:
+    redirecting_married_parties
+  was_mother_married_at_birth
+  if was_mother_married_at_birth == True:
+    redirecting_married_at_birth
+  married_300_days_before
+  Affidavit_of_indigencey
   trial_court.division
   users.gather()
   set_progress(9.09)
@@ -100,10 +108,6 @@ mandatory: True
 code: |
   al_intro_screen
   Complaint_to_Establish_Paternity_intro
-  Complaint_to_Establish_Paternity_intro_2
-  Married_at_time
-  married_300_days_before
-  Affidavit_of_indigencey
   interview_order_Complaint_to_Establish_Paternity
   signature_date
   # Save anonymized interview statistics (customize the saved data below)
@@ -125,29 +129,35 @@ question: |
   Complaint to Establish Paternity
 subquestion: |
   This is a form to establish {paternity} for a child born out of wedlock.
+--- 
+id: redirecting_married_parties
+event: redirecting_married_parties
+question: |
+  This is the incorrect form 
+subquestion: |
+  Add correct link to new form.
 ---
-comment: |
-  This question is used to introduce your interview. Please customize
-id: Complaint_to_Establish_Paternity_2
-continue button field: Complaint_to_Establish_Paternity_intro_2
+id: are_parties_married
 question: |
   Are the Plaintiff and Defendant currently married?
-field: plaintiff_married_defendant
-choices:
-  - Yes
-  - No
+fields: 
+  - no label: are_parties_currently_married
+    datatype: yesnoradio
 ---
-comment: |
-  This question is used to introduce your interview. Please customize
-id: Married_at_time_id
-continue button field: Married_at_time
+id: redirecting_married_at_birth
+event: redirecting_married_at_birth
 question: |
-  Was the mother married at time of child birth?
-field: mother_not_married_at_birth
-choices:
- - Yes
- - No
---- 
+  This is the incorrect form 
+subquestion: |
+  Add correct link to new form.
+---
+id: married_at_time_of_birth
+question: |
+  Was mother married at the time of birth?
+fields:
+  - no label: was_mother_married_at_birth
+    datatype: yesnoradio 
+---
 comment: |
   This question is used to introduce your interview. Please customize
 id: married_300_days_before_id
