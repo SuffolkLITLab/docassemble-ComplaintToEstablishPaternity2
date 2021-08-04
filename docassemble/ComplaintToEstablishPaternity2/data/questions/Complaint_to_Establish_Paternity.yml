@@ -184,11 +184,9 @@ subquestion: |
 ---
 id: Plaintiff relation to the Child
 question: |
-  Plaintiff relation
-subquestion: |
-  Please indicate your relation to the child
+  Please indicate ${users[0].name.first} relation to the child
 fields:
-  - "Are you the mother or father of child born out of wedlock": is_the_mother_or_father_of_child_born_out_of_wedlock_yes
+  - "Is ${users[0].name.first} the mother or father of child born out of wedlock": is_the_mother_or_father_of_child_born_out_of_wedlock_yes
     datatype: yesno
   - "mother of child born out of wedlock": is_mother_of_child_born_out_of_wedlock_yes
     datatype: yesno
@@ -233,24 +231,22 @@ fields:
 ---
 id: Defendant Opposing party Relation
 question: |
-  Defendant/Opposing party Relation
-subquestion: |
-  Please indicate the Defendants/Opposing party's relationship to the child.
+  Please indicate ${other_parties[i].name_fields()} party's relationship to the child.
 fields:
-  - "Defendant is mother of child": is_other_party_mother_of_child_yes
+  - "${other_parties[i].name_fields()} is mother of child": is_other_party_mother_of_child_yes
     datatype: yesno
-  - "Defendant is father of child": is_other_party_father_of_child_yes
+  - "${other_parties[i].name_fields()} is father of child": is_other_party_father_of_child_yes
     datatype: yesno
 ---
 id: Plaintiff Request that the court
 question: |
-  Plaintiff Request
+  ${users[0].name.first} request
 subquestion: |
   Indicate which of the following actions you are requesting from the court
 fields:
-  - "Adjudicate Plaintiff or Defendant to be father of child": is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
+  - "Adjudicate ${users[0].name.first} or Defendant to be father of child": is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
     datatype: yesno
-  - "Plaintiff to be the father of child": is_user_to_be_the_father_of_child_yes
+  - "${users[0].name.first} to be the father of child": is_user_to_be_the_father_of_child_yes
     datatype: yesno
     show if: is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
   - "Defendant to be the father of child": is_other_party_to_be_the_father_of_child_yes
@@ -260,7 +256,7 @@ fields:
     datatype: yesno
   - "Order one party to maintain or provide insurance": is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
     datatype: yesno
-  - "Ask Plaintiff to maintain or provide insurance": is_asking_user_to_maintain_or_provide_insurance_yes
+  - "Ask ${users[0].name.first} to maintain or provide insurance": is_asking_user_to_maintain_or_provide_insurance_yes
     datatype: yesno
     show if: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
   - "Ask Defendant to provide health insurance": is_asking_other_party_provide_health_insurance_yes
@@ -274,7 +270,7 @@ fields:
     show if: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
   - "Prohibit Defendant from imposing restraint": is_asking_to_prohibit_other_party_from_imposing_restraint_yes
     datatype: yesno
-  - "Prohibit Defendant from imposing restraint on Plaintiff": is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes
+  - "Prohibit Defendant from imposing restraint on ${users[0].name.first}": is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes
     datatype: yesno
     show if: is_asking_to_prohibit_other_party_from_imposing_restraint_yes
   - "Prohibit Defendant from imposing restraint on child": is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
@@ -282,15 +278,15 @@ fields:
     show if: is_asking_to_prohibit_other_party_from_imposing_restraint_yes
   - "Grant one party custody": is_asking_grant_user_or_other_party_custody_yes
     datatype: yesno
-  - "Grant Plaintiff custody": is_asking_to_grant_user_custody_yes
+  - "Grant ${users[0].name.first} custody": is_asking_to_grant_user_custody_yes
     datatype: yesno
     show if: is_asking_grant_user_or_other_party_custody_yes
   - "Grant Defendant custody": is_asking_to_grant_other_party_custody_yes
     datatype: yesno
     show if: is_asking_grant_user_or_other_party_custody_yes
-  - "Grant Plaintiff or Defendant parenting time": is_asking_grant_user_or_other_party_parenting_time_yes
+  - "Grant ${users[0].name.first} or Defendant parenting time": is_asking_grant_user_or_other_party_parenting_time_yes
     datatype: yesno
-  - "Grant Plaintiff parenting time": is_asking_grant_user_parenting_time_yes
+  - "Grant ${users[0].name.first} parenting time": is_asking_grant_user_parenting_time_yes
     datatype: yesno
     show if: is_asking_grant_user_or_other_party_parenting_time_yes
   - "Grant Defendant parenting time": is_asking_grant_other_party_parenting_time_yes
