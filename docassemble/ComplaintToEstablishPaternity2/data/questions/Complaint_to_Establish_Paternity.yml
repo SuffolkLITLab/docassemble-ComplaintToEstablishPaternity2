@@ -70,7 +70,9 @@ code: |
   was_mother_married_at_birth
   if was_mother_married_at_birth == True:
     redirecting_married_at_birth
-  married_300_days_before
+  was_mother_married_300_days_before_birth
+  if was_mother_married_300_days_before_birth == True:
+    redirecting_married_300_days_before
   Affidavit_of_indigencey
   trial_court.division
   users.gather()
@@ -158,17 +160,20 @@ fields:
   - no label: was_mother_married_at_birth
     datatype: yesnoradio 
 ---
-comment: |
-  This question is used to introduce your interview. Please customize
-id: married_300_days_before_id
-continue button field: married_300_days_before
+id: redirecting_married_300_days_before
+event: redirecting_married_300_days_before
 question: |
-  Was the mother of the child married within 300 days before the childs birth?
-field: married_300_days_before_not
-choices:
- - Yes
- - No
+  This is the incorrect form 
+subquestion: |
+  Add correct link to new form.
 ---
+id: married_300_days_before_birth
+question: |
+  Was mother married 300 days before birth?
+fields:
+  - no label: was_mother_married_300_days_before_birth
+    datatype: yesnoradio
+--- 
 id: Complaint to Establish Paternity
 question: |
   Complaint to Establish Paternity
