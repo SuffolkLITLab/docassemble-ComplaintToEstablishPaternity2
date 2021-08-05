@@ -99,7 +99,7 @@ code: |
   children[0].address.address
   set_progress(45.45)
   other_parties.gather(0)
-  is_other_party_mother_of_child_yes
+  defendant_relation
   set_progress(54.55)
   other_parties[0].address.address
   signature_date
@@ -260,11 +260,10 @@ fields:
 id: Defendant Opposing party Relation
 question: |
   Please indicate Def party's relationship to the child.
-fields:
-  - "Def is mother of child": is_other_party_mother_of_child_yes
-    datatype: yesno
-  - "Def is father of child": is_other_party_father_of_child_yes
-    datatype: yesno
+field: defendant_relation
+choices:
+  - Def is mother of child: is_other_party_mother_of_child_yes
+  - Def is father of child: is_other_party_father_of_child_yes
 ---
 id: Plaintiff request to adjudicate
 question: |
