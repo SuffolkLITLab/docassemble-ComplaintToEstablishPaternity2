@@ -85,7 +85,6 @@ code: |
     is_plaintiff_guardian_or_custodian
   if plaintiff_relation == 'is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes':
     is_plaintiff_representative
-  defendant_relation
   set_progress(18.18)
   users[0].address.address
   is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
@@ -100,7 +99,7 @@ code: |
   children[0].address.address
   set_progress(45.45)
   other_parties.gather(0)
-  is_other_party_mother_of_child_yes
+  defendant_relation
   set_progress(54.55)
   other_parties[0].address.address
   signature_date
