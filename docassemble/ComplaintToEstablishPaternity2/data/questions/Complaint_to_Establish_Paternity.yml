@@ -78,7 +78,11 @@ code: |
   users.gather()
   set_progress(9.09)
   set_parts(subtitle=str(users))
-  is_the_mother_or_father_of_child_born_out_of_wedlock_yes
+  plaintiff_relation
+  if plaintiff_relation == 'is_the_mother_or_father_of_child_born_out_of_wedlock_yes':
+    is_plaintiff_mother_or_father
+  if plaintiff_relation == 'is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes':
+    is_plaintiff_guardian_or_custodian
   set_progress(18.18)
   users[0].address.address
   is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
@@ -195,20 +199,38 @@ question: |
  Waiving your court fee's.
 subquestion: |
  The court can also waive or ask the state to pay for “extra” fees. You must fill out a form called an Affidavit of Indigency. This form tells the court you cannot afford the fees related to your case. If the clerk or a judge approves the form, you will not have to pay.
-  Please refer to the following link (it will re-direct you the MassLegalHelp page that has the information of a fee form waiver). [Affidavit of Indigency](https://www.masslegalhelp.org/housing/forms/indigency-affidavit)
+  Please refer to the following link (it will re-direct you the MassLegalHelp page that has the information of a fee form waiver). [Affidavit of Indigency](https://courtformsonline.org/other/#indigency)
 ---
-id: Plaintiff relation to the Child
+id: plaintiff_relationship_to_child
+question: | 
+  What is your relation to the child? 
+field: plaintiff_relation
+choices:
+  - Parent: is_the_mother_or_father_of_child_born_out_of_wedlock_yes
+  - Guardian or custodian: is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
+  - Representative for parent: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
+  - The child: is_a_child_born_out_of_wedlock_yes
+--- 
+id: Plaintiff parent relation to the Child
 question: |
-  Please indicate ${users[0].name.first} relation to the child
-fields:
-  - "Is ${users[0].name.first} the mother or father of child born out of wedlock": is_the_mother_or_father_of_child_born_out_of_wedlock_yes
-    datatype: yesno
-  - "mother of child born out of wedlock": is_mother_of_child_born_out_of_wedlock_yes
-    datatype: yesno
-    show if: is_the_mother_or_father_of_child_born_out_of_wedlock_yes
-  - "father of child born out of wedlock": is_father_of_child_born_out_of_wedlock_yes
-    datatype: yesno
-    show if: is_the_mother_or_father_of_child_born_out_of_wedlock_yes
+  Are you the mother or father?
+field: is_plaintiff_mother_or_father
+choices:
+  - mother: is_mother_of_child_born_out_of_wedlock_yes
+  - father: is_father_of_child_born_out_of_wedlock_yes
+---
+id: Plaintiff guardian/custodian relation
+question: |
+  Are you the guardian or custodian of child?
+field: is_plaintiff_guardian_or_custodian
+choices: 
+  - guardian: is_guardian_of_child_born_out_of_wedlock_yes
+  - custodian: is_custodian_of_child_born_out_of_wedlock_yes
+---
+id: relations
+question: |
+  indicatie
+fields: 
   - "Is the child born out of wedlock": is_a_child_born_out_of_wedlock_yes
     datatype: yesno
   - "Guardian or custodian of a child born out of wedlock": is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
