@@ -85,6 +85,7 @@ code: |
     is_plaintiff_guardian_or_custodian
   if plaintiff_relation == 'is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes':
     is_plaintiff_representative
+  defendant_relation
   set_progress(18.18)
   users[0].address.address
   is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
@@ -260,11 +261,10 @@ fields:
 id: Defendant Opposing party Relation
 question: |
   Please indicate Def party's relationship to the child.
-fields:
-  - "Def is mother of child": is_other_party_mother_of_child_yes
-    datatype: yesno
-  - "Def is father of child": is_other_party_father_of_child_yes
-    datatype: yesno
+field: defendant_relation
+choices:
+  - Def is mother of child: is_other_party_mother_of_child_yes
+  - Def is father of child: is_other_party_father_of_child_yes
 ---
 id: Plaintiff request to adjudicate
 question: |
