@@ -83,6 +83,8 @@ code: |
     is_plaintiff_mother_or_father
   if plaintiff_relation == 'is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes':
     is_plaintiff_guardian_or_custodian
+  if plaintiff_relation == 'is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes':
+    is_plaintiff_representative
   set_progress(18.18)
   users[0].address.address
   is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
@@ -227,34 +229,15 @@ choices:
   - guardian: is_guardian_of_child_born_out_of_wedlock_yes
   - custodian: is_custodian_of_child_born_out_of_wedlock_yes
 ---
-id: relations
+id: Plaintiff relation as representative 
 question: |
-  indicatie
-fields: 
-  - "Is the child born out of wedlock": is_a_child_born_out_of_wedlock_yes
-    datatype: yesno
-  - "Guardian or custodian of a child born out of wedlock": is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
-    datatype: yesno
-  - "Guardian of child born out of wedlock": is_guardian_of_child_born_out_of_wedlock_yes
-    datatype: yesno
-    show if: is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
-  - "Custodian of child born out of wedlock": is_custodian_of_child_born_out_of_wedlock_yes
-    datatype: yesno
-    show if: is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
-  - "Is the parent or representative of the parent of the child born out of wedlock": is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
-    datatype: yesno
-  - "Parent of parent of child born out of wedlock": is_parent_of_parent_of_child_born_out_of_wedlock_yes
-    datatype: yesno
-    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
-  - "Representative of parent of child born out of wedlock": is_representative_of_parent_of_child_born_out_of_wedlock_yes
-    datatype: yesno
-    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
-  - "User is parent of the mother of child": user_is_parent_of_the_mother_of_child_yes
-    datatype: yesno
-    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
-  - "User is the parent of father of child": user_is_the_parent_of_father_of_child_yes
-    datatype: yesno
-    show if: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_
+  Are you the grandparent of the child or a representative for the child's parent?
+field: is_plaintiff_representative
+choices:
+  - Parent of mother: user_is_parent_of_the_mother_of_child_yes
+  - Parent of father: user_is_the_parent_of_father_of_child_yes
+  - Personal representative for mother: is_representative_of_parent_of_child_born_out_of_wedlock_yes
+  - Personal representative for father: is_representative_of_parent_of_child_born_out_of_wedlock_yes
 ---
 sets:
   - other_parties[i].name.first
