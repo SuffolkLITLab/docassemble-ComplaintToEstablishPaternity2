@@ -135,9 +135,7 @@ subquestion: |
 id: redirecting_married_parties
 event: redirecting_married_parties
 question: |
-  This is the incorrect form 
-subquestion: |
-  Add correct link to new form.
+  This is not the correct form
 ---
 id: are_parties_married
 question: |
@@ -149,9 +147,7 @@ fields:
 id: redirecting_married_at_birth
 event: redirecting_married_at_birth
 question: |
-  This is the incorrect form 
-subquestion: |
-  Add correct link to new form.
+  This is not the correct form
 ---
 id: married_at_time_of_birth
 question: |
@@ -163,9 +159,7 @@ fields:
 id: redirecting_married_300_days_before
 event: redirecting_married_300_days_before
 question: |
-  This is the incorrect form 
-subquestion: |
-  Add correct link to new form.
+  This is not the correct form
 ---
 id: married_300_days_before_birth
 question: |
