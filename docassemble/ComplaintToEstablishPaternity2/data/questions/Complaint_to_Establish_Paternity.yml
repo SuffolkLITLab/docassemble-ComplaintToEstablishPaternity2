@@ -88,6 +88,10 @@ code: |
   set_progress(18.18)
   users[0].address.address
   is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
+  is_to_order_suitable_amount_of_child_support_yes
+  is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
+  is_asking_to_prohibit_other_party_from_imposing_restraint_yes
+  is_asking_grant_user_or_other_party_custody_yes
   set_progress(27.27)
   children.gather()
   children[0].birthdate
@@ -258,60 +262,55 @@ fields:
   - "Def is father of child": is_other_party_father_of_child_yes
     datatype: yesno
 ---
-id: Plaintiff Request that the court
+id: Plaintiff request to adjudicate
 question: |
-  ${users[0].name.first} request
-subquestion: |
-  Indicate which of the following actions you are requesting from the court
+  Are you requesting the court to adjudicate defendant to be father of the child?
+field: is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
+choices:
+  - ${users[0].name.first} to be the father of child: is_user_to_be_the_father_of_child_yes
+  - Defendant to be the father of child: is_other_party_to_be_the_father_of_child_yes
+---
+id: Plaintiff requesting child support
+question: |
+  Are you requesting child support? 
 fields:
-  - "Adjudicate ${users[0].name.first} or Defendant to be father of child": is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
-    datatype: yesno
-  - "${users[0].name.first} to be the father of child": is_user_to_be_the_father_of_child_yes
-    datatype: yesno
-    show if: is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
-  - "Defendant to be the father of child": is_other_party_to_be_the_father_of_child_yes
-    datatype: yesno
-    show if: is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
-  - "Order suitable amount of child support": is_to_order_suitable_amount_of_child_support_yes
-    datatype: yesno
-  - "Order one party to maintain or provide insurance": is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
-    datatype: yesno
-  - "Ask ${users[0].name.first} to maintain or provide insurance": is_asking_user_to_maintain_or_provide_insurance_yes
-    datatype: yesno
-    show if: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
-  - "Ask Defendant to provide health insurance": is_asking_other_party_provide_health_insurance_yes
-    datatype: yesno
-    show if: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
-  - "To maintain insurance": is_asking_to_maintain_insurance_yes
-    datatype: yesno
-    show if: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
-  - "To provide health insurance": is_asking_to_provide_health_yes
-    datatype: yesno
-    show if: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
-  - "Prohibit Defendant from imposing restraint": is_asking_to_prohibit_other_party_from_imposing_restraint_yes
-    datatype: yesno
-  - "Prohibit Defendant from imposing restraint on ${users[0].name.first}": is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes
-    datatype: yesno
-    show if: is_asking_to_prohibit_other_party_from_imposing_restraint_yes
-  - "Prohibit Defendant from imposing restraint on child": is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
-    datatype: yesno
-    show if: is_asking_to_prohibit_other_party_from_imposing_restraint_yes
-  - "Grant one party custody": is_asking_grant_user_or_other_party_custody_yes
-    datatype: yesno
-  - "Grant ${users[0].name.first} custody": is_asking_to_grant_user_custody_yes
-    datatype: yesno
-    show if: is_asking_grant_user_or_other_party_custody_yes
-  - "Grant Defendant custody": is_asking_to_grant_other_party_custody_yes
-    datatype: yesno
-    show if: is_asking_grant_user_or_other_party_custody_yes
-  - "Grant ${users[0].name.first} or Defendant parenting time": is_asking_grant_user_or_other_party_parenting_time_yes
-    datatype: yesno
-  - "Grant ${users[0].name.first} parenting time": is_asking_grant_user_parenting_time_yes
-    datatype: yesno
-    show if: is_asking_grant_user_or_other_party_parenting_time_yes
-  - "Grant Defendant parenting time": is_asking_grant_other_party_parenting_time_yes
-    datatype: yesno
-    show if: is_asking_grant_user_or_other_party_parenting_time_yes
+  - no label: is_to_order_suitable_amount_of_child_support_yes
+    datatype: yesnoradio
+---
+id: Plaintiff requesting to maintain/provide insurance
+question: |
+  Are you requesting an order for the defendant to maintain or provide insurance?
+field: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
+choices:
+  - Ask ${users[0].name.first} to maintain or provide insurance: is_asking_user_to_maintain_or_provide_insurance_yes
+  - Ask Defendant to provide health insurance: is_asking_other_party_provide_health_insurance_yes
+  - To maintain insurance: is_asking_to_maintain_insurance_yes
+  - To provide health insurance: is_asking_to_provide_health_yes
+---
+id: Plaintiff requesting prohibit restraint
+question: |
+  Are you prohibiting a party from imposing restraint?
+field: is_asking_to_prohibit_other_party_from_imposing_restraint_yes
+choices: 
+  - Prohibit Defendant from imposing restraint on ${users[0].name.first}: is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes
+  - Prohibit Defendant from imposing restraint on child: is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
+  
+---
+id: Plaintiff requesting to grant custody
+question: |
+  Are you requesting custody?
+field: is_asking_grant_user_or_other_party_custody_yes
+choices:
+  - Grant Plaintiff custody: is_asking_to_grant_user_custody_yes
+  - Grant Defendant custody: is_asking_to_grant_other_party_custody_yes
+---
+id: Plaintiff requesting parenting time
+question: |
+  Are you requesting parenting time?
+field: is_asking_grant_user_or_other_party_parenting_time_yes
+choices:
+  - Grant ${users[0].name.first} parenting time: is_asking_grant_user_parenting_time_yes
+  - Grant Defendant parenting time: is_asking_grant_other_party_parenting_time_yes
 ---
 id: pro se or atty
 question: | 
