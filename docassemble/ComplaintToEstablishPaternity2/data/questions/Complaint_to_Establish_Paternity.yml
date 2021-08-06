@@ -73,7 +73,6 @@ code: |
   was_mother_married_300_days_before_birth
   if was_mother_married_300_days_before_birth == True:
     redirecting_married_300_days_before
-  Affidavit_of_indigencey
   set_progress(9.09)
   users.gather()
   users[0].address.address
@@ -111,6 +110,7 @@ code: |
     user_or_attorney[0].phone_number
   trial_court.division
   set_progress(72.73)
+  Affidavit_of_indigencey
   interview_order_Complaint_to_Establish_Paternity = True
 ---
 ###################### Main order ######################
@@ -170,7 +170,7 @@ subquestion: |
 ---
 id: married_at_time_of_birth
 question: |
-  Was mother married at the time of birth?
+  Was the mother married at the time of the child's birth?
 fields:
   - no label: was_mother_married_at_birth
     datatype: yesnoradio 
@@ -184,7 +184,7 @@ subquestion: |
 ---
 id: married_300_days_before_birth
 question: |
-  Was mother married 300 days before birth?
+  Was the mother married 300 days **before** child's birth?
 fields:
   - no label: was_mother_married_300_days_before_birth
     datatype: yesnoradio
@@ -260,11 +260,11 @@ fields:
 ---
 id: Defendant Opposing party Relation
 question: |
-  Please indicate Def party's relationship to the child.
+  Please indicate ${other_parties[0].name.first} relationship to the child.
 field: defendant_relation
 choices:
-  - Def is mother of child: is_other_party_mother_of_child_yes
-  - Def is father of child: is_other_party_father_of_child_yes
+  - Mother: is_other_party_mother_of_child_yes
+  - Father: is_other_party_father_of_child_yes
 ---
 id: Plaintiff request to adjudicate
 question: |
@@ -272,7 +272,7 @@ question: |
 field: is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
 choices:
   - ${users[0].name.first} to be the father of child: is_user_to_be_the_father_of_child_yes
-  - Defendant to be the father of child: is_other_party_to_be_the_father_of_child_yes
+  - ${other_parties[0].name.first} to be the father of child: is_other_party_to_be_the_father_of_child_yes
   - No: nope
 ---
 id: Plaintiff requesting child support
@@ -288,7 +288,7 @@ question: |
 field: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
 choices:
   - Ask ${users[0].name.first} to maintain or provide insurance: is_asking_user_to_maintain_or_provide_insurance_yes
-  - Ask Defendant to provide health insurance: is_asking_other_party_provide_health_insurance_yes
+  - Ask ${other_parties[0].name.first} to provide health insurance: is_asking_other_party_provide_health_insurance_yes
   - To maintain insurance: is_asking_to_maintain_insurance_yes
   - To provide health insurance: is_asking_to_provide_health_yes
   - No: nope
@@ -298,8 +298,8 @@ question: |
   Are you prohibiting a party from imposing restraint?
 field: is_asking_to_prohibit_other_party_from_imposing_restraint_yes
 choices: 
-  - Prohibit Defendant from imposing restraint on ${users[0].name.first}: is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes
-  - Prohibit Defendant from imposing restraint on child: is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
+  - Prohibit ${other_parties[0].name.first} from imposing restraint on ${users[0].name.first}: is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes
+  - Prohibit ${other_parties[0].name.first} from imposing restraint on child: is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
   - No: nope
   
 ---
@@ -308,8 +308,8 @@ question: |
   Are you requesting custody?
 field: is_asking_grant_user_or_other_party_custody_yes
 choices:
-  - Grant Plaintiff custody: is_asking_to_grant_user_custody_yes
-  - Grant Defendant custody: is_asking_to_grant_other_party_custody_yes
+  - Grant ${users[0].name.first} custody: is_asking_to_grant_user_custody_yes
+  - Grant ${other_parties[0].name.first} custody: is_asking_to_grant_other_party_custody_yes
   - No: nope
 ---
 id: Plaintiff requesting parenting time
@@ -318,7 +318,7 @@ question: |
 field: is_asking_grant_user_or_other_party_parenting_time_yes
 choices:
   - Grant ${users[0].name.first} parenting time: is_asking_grant_user_parenting_time_yes
-  - Grant Defendant parenting time: is_asking_grant_other_party_parenting_time_yes
+  - Grant ${other_parties[0].name.first} parenting time: is_asking_grant_other_party_parenting_time_yes
   - No: nope
 ---
 id: pro se or atty
@@ -336,7 +336,7 @@ subquestion: |
   If you are an attorney please provide your BBO number. If you are Pro Se (self-representing), leave blank.
 fields:
   - "Attorney Board of Bar Overseers": attorney_bbo
-    maxlength: 42
+    maxlength: 11
     required: false
 ---
 id: preview Complaint_to_Establish_Paternity
