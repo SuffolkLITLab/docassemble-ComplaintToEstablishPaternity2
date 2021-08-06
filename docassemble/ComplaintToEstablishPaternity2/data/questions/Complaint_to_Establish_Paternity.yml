@@ -86,7 +86,6 @@ code: |
   set_progress(36.36)
   set_parts(subtitle=str(users))
   plaintiff_relation
-  defendant_relation
   set_progress(45.45)
   if plaintiff_relation == 'is_the_mother_or_father_of_child_born_out_of_wedlock_yes':
     is_plaintiff_mother_or_father
@@ -94,6 +93,7 @@ code: |
     is_plaintiff_guardian_or_custodian
   if plaintiff_relation == 'is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes':
     is_plaintiff_representative
+  defendant_relation
   set_progress(54.55)
   is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
   is_to_order_suitable_amount_of_child_support_yes
@@ -199,7 +199,7 @@ subquestion: |
   - Affidavit of Care and Custody (Form 
     available at the courthouse)
     
-  Please Note: You must file a separate complaint for EACH child.
+  Please Note: You must file a separate complaint for **each** child.
   
   As of July 1, 2009 there is a filing fee of $100, plus surcharge ($15) except in cases filed by the IV-D agency.
 continue button field: Complaint_to_Establish_Paternity
@@ -227,16 +227,16 @@ question: |
   Are you the mother or father?
 field: is_plaintiff_mother_or_father
 choices:
-  - mother: is_mother_of_child_born_out_of_wedlock_yes
-  - father: is_father_of_child_born_out_of_wedlock_yes
+  - Mother: is_mother_of_child_born_out_of_wedlock_yes
+  - Father: is_father_of_child_born_out_of_wedlock_yes
 ---
 id: Plaintiff guardian/custodian relation
 question: |
   Are you the guardian or custodian of child?
 field: is_plaintiff_guardian_or_custodian
 choices: 
-  - guardian: is_guardian_of_child_born_out_of_wedlock_yes
-  - custodian: is_custodian_of_child_born_out_of_wedlock_yes
+  - Guardian: is_guardian_of_child_born_out_of_wedlock_yes
+  - Custodian: is_custodian_of_child_born_out_of_wedlock_yes
 ---
 id: Plaintiff relation as representative 
 question: |
@@ -260,7 +260,7 @@ fields:
 ---
 id: Defendant Opposing party Relation
 question: |
-  Please indicate ${other_parties[0].name.first} relationship to the child.
+  Please indicate ${other_parties[0].name.first}'s relationship to ${children[0].name.first}.
 field: defendant_relation
 choices:
   - Mother: is_other_party_mother_of_child_yes
@@ -268,7 +268,7 @@ choices:
 ---
 id: Plaintiff request to adjudicate
 question: |
-  Are you requesting the court to {adjudicate} defendant to be father of the child?
+  Are you requesting the court to {adjudicate} defendant to be father of the ${children[0].name.first}?
 field: is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
 choices:
   - ${users[0].name.first} to be the father of child: is_user_to_be_the_father_of_child_yes
@@ -299,7 +299,7 @@ question: |
 field: is_asking_to_prohibit_other_party_from_imposing_restraint_yes
 choices: 
   - Prohibit ${other_parties[0].name.first} from imposing restraint on ${users[0].name.first}: is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes
-  - Prohibit ${other_parties[0].name.first} from imposing restraint on child: is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
+  - Prohibit ${other_parties[0].name.first} from imposing restraint on ${children[0].name.first}: is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
   - No: nope
   
 ---
