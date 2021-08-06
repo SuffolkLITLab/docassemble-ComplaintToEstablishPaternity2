@@ -74,41 +74,42 @@ code: |
   if was_mother_married_300_days_before_birth == True:
     redirecting_married_300_days_before
   Affidavit_of_indigencey
-  trial_court.division
-  users.gather()
   set_progress(9.09)
+  users.gather()
+  users[0].address.address
+  set_progress(18.18)
+  other_parties.gather()
+  other_parties[0].address.address
+  set_progress(27.27)
+  children.gather()
+  children[0].address.address
+  children[0].birthdate
+  set_progress(36.36)
   set_parts(subtitle=str(users))
   plaintiff_relation
+  defendant_relation
+  set_progress(45.45)
   if plaintiff_relation == 'is_the_mother_or_father_of_child_born_out_of_wedlock_yes':
     is_plaintiff_mother_or_father
   if plaintiff_relation == 'is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes':
     is_plaintiff_guardian_or_custodian
   if plaintiff_relation == 'is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes':
     is_plaintiff_representative
-  set_progress(18.18)
-  users[0].address.address
+  set_progress(54.55)
   is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
   is_to_order_suitable_amount_of_child_support_yes
   is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
   is_asking_to_prohibit_other_party_from_imposing_restraint_yes
   is_asking_grant_user_or_other_party_custody_yes
-  set_progress(27.27)
-  children.gather()
-  children[0].birthdate
-  set_progress(36.36)
-  children[0].address.address
-  set_progress(45.45)
-  other_parties.gather(0)
-  defendant_relation
-  set_progress(54.55)
-  other_parties[0].address.address
-  signature_date
   set_progress(63.64)
+  signature_date
+  pro_se_or_atty = 'prose'
   if pro_se_or_atty == 'attorney':
     user_or_attorney.gather()
     user_or_attorney[0].address.address
     attorney_bbo
     user_or_attorney[0].phone_number
+  trial_court.division
   set_progress(72.73)
   interview_order_Complaint_to_Establish_Paternity = True
 ---
