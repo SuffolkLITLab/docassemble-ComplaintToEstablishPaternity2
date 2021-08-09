@@ -8,7 +8,7 @@ metadata:
   title: |
     Complaint to Establish Paternity
   short title: |
-    Complaint to establish paternity
+    Complaint to Establish Paternity
   tags:
     - FA-00-00-00-00
 ---
@@ -145,7 +145,15 @@ continue button field: Complaint_to_Establish_Paternity_intro
 question: |
   Complaint to Establish Paternity
 subquestion: |
-  This is a form to establish {paternity} for a child born out of wedlock.
+  This is a form to establish {paternity} for a child born out of wedlock. This form is for those who want to establish a legal relationship between a father and his child.
+  If the father is already legally established, you do not need this form.
+--- 
+id: who_can_file
+event: who_can_file
+question: |
+  Who can and cannot file
+subquestion: |
+  Enter info
 --- 
 id: redirecting_married_parties
 event: redirecting_married_parties
@@ -199,7 +207,7 @@ subquestion: |
   - Affidavit of Care and Custody (Form 
     available at the courthouse)
     
-  Please Note: You must file a separate complaint for **each** child.
+  Note: You must file a separate complaint for **each** child.
   
   As of July 1, 2009 there is a filing fee of $100, plus surcharge ($15) except in cases filed by the IV-D agency.
 continue button field: Complaint_to_Establish_Paternity
@@ -210,7 +218,7 @@ question: |
  Waiving your court fee's.
 subquestion: |
  The court can also waive or ask the state to pay for “extra” fees. You must fill out a form called an Affidavit of Indigency. This form tells the court you cannot afford the fees related to your case. If the clerk or a judge approves the form, you will not have to pay.
-  Please refer to the following link (it will re-direct you the MassLegalHelp page that has the information of a fee form waiver). [Affidavit of Indigency](https://courtformsonline.org/other/#indigency)
+  Refer to the following link (it will re-direct you the MassLegalHelp page that has the information of a fee form waiver). [Affidavit of Indigency](https://courtformsonline.org/other/#indigency)
 ---
 id: plaintiff_relationship_to_child
 question: | 
@@ -260,7 +268,7 @@ fields:
 ---
 id: Defendant Opposing party Relation
 question: |
-  Please indicate ${other_parties[0].name.first}'s relationship to ${children[0].name.first}.
+  What is ${other_parties[0].name.first}'s relationship to ${children[0].name.first}.
 field: defendant_relation
 choices:
   - Mother: is_other_party_mother_of_child_yes
