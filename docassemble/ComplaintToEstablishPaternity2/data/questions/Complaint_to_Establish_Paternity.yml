@@ -64,6 +64,17 @@ code: |
   nav.set_section('review_Complaint_to_Establish_Paternity')
   user_ask_role = 'plaintiff'
   Complaint_to_Establish_Paternity
+  children.gather()
+  children[0].birthdate
+  users.gather()
+  other_parties.gather()
+  plaintiff_relation
+  if plaintiff_relation == 'is_the_mother_or_father_of_child_born_out_of_wedlock_yes':
+    is_plaintiff_mother_or_father
+  if plaintiff_relation == 'is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes':
+    is_plaintiff_guardian_or_custodian
+  if plaintiff_relation == 'is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes':
+    is_plaintiff_representative
   are_parties_currently_married
   if are_parties_currently_married == True:
     redirecting_married_parties
@@ -74,25 +85,15 @@ code: |
   if was_mother_married_300_days_before_birth == True:
     redirecting_married_300_days_before
   set_progress(9.09)
-  users.gather()
   users[0].address.address
   set_progress(18.18)
-  other_parties.gather()
   other_parties[0].address.address
   set_progress(27.27)
-  children.gather()
   children[0].address.address
-  children[0].birthdate
   set_progress(36.36)
   set_parts(subtitle=str(users))
-  plaintiff_relation
   set_progress(45.45)
-  if plaintiff_relation == 'is_the_mother_or_father_of_child_born_out_of_wedlock_yes':
-    is_plaintiff_mother_or_father
-  if plaintiff_relation == 'is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes':
-    is_plaintiff_guardian_or_custodian
-  if plaintiff_relation == 'is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes':
-    is_plaintiff_representative
+
   defendant_relation
   set_progress(54.55)
   is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
@@ -155,16 +156,23 @@ question: |
 subquestion: |
   Enter info
 --- 
+id: child_not_yet_born
+question: |
+  If the child is not yet born, only the **biological** mother may continue to fill out the form.
+fields:
+  - Birthdate: children[0].birthdate
+    datatype: date
+---
 id: redirecting_married_parties
 event: redirecting_married_parties
 question: |
-  This is not the correct form
+  We cannot help you
 subquestion: |
   For more information: [Information on Establishing Paternity in court](https://www.masslegalhelp.org/children-and-families/establishing-paternity)
 ---
 id: are_parties_married
 question: |
-  Are the Plaintiff and Defendant currently married?
+  Are the ${users[0].name.first} and ${other_parties[0].name.first} currently married?
 fields: 
   - no label: are_parties_currently_married
     datatype: yesnoradio
@@ -172,7 +180,7 @@ fields:
 id: redirecting_married_at_birth
 event: redirecting_married_at_birth
 question: |
-  This is not the correct form
+  We cannot help you
 subquestion: |
   For more information: [Information on Establishing Paternity in court](https://www.masslegalhelp.org/children-and-families/establishing-paternity)
 ---
@@ -186,7 +194,7 @@ fields:
 id: redirecting_married_300_days_before
 event: redirecting_married_300_days_before
 question: |
-  This is not the correct form
+  We cannot help you
 subquestion: |
   For more information: [Information on Establishing Paternity in court](https://www.masslegalhelp.org/children-and-families/establishing-paternity)
 ---
