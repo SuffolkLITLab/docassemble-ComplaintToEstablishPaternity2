@@ -40,7 +40,7 @@ code: |
     })
 ---
 code: |
-  interview_short_title = "File a Complaint to establish paternity"
+  interview_short_title = "Ask court to determine father"
 ---
 code: |
   al_form_type = 'other'
@@ -147,7 +147,8 @@ question: |
   Complaint to Establish Paternity
 subquestion: |
   This is a form to establish {paternity} for a child born out of wedlock. This form is for those who want to establish a legal relationship between a father and his child.
-  If the father is already legally established, you do not need this form.
+  
+  If the father is already legally established, you **do not** need this form.
 --- 
 id: who_can_file
 event: who_can_file
@@ -179,7 +180,7 @@ subquestion: |
 ---
 id: married_at_time_of_birth
 question: |
-  Was the mother married at the time of the child's birth?
+  Was the biological mother married at the time of the ${children[0].name.first}'s birth?
 fields:
   - no label: was_mother_married_at_birth
     datatype: yesnoradio 
@@ -193,7 +194,7 @@ subquestion: |
 ---
 id: married_300_days_before_birth
 question: |
-  Was the mother married 300 days **before** child's birth?
+  Was the mother married 300 days **before** ${children[0].name.first}'s birth?
 fields:
   - no label: was_mother_married_300_days_before_birth
     datatype: yesnoradio
@@ -223,7 +224,7 @@ subquestion: |
 ---
 id: plaintiff_relationship_to_child
 question: | 
-  What is your relation to the child? 
+  What is your relationship to ${children[0].name.first}? 
 field: plaintiff_relation
 choices:
   - Parent: is_the_mother_or_father_of_child_born_out_of_wedlock_yes
@@ -233,7 +234,7 @@ choices:
 --- 
 id: Plaintiff parent relation to the Child
 question: |
-  Are you the mother or father?
+  Are you the mother or father of ${children[0].name.first}?
 field: is_plaintiff_mother_or_father
 choices:
   - Mother: is_mother_of_child_born_out_of_wedlock_yes
@@ -241,7 +242,7 @@ choices:
 ---
 id: Plaintiff guardian/custodian relation
 question: |
-  Are you the guardian or custodian of child?
+  Are you the guardian or custodian of ${children[0].name.first}?
 field: is_plaintiff_guardian_or_custodian
 choices: 
   - Guardian: is_guardian_of_child_born_out_of_wedlock_yes
@@ -249,7 +250,7 @@ choices:
 ---
 id: Plaintiff relation as representative 
 question: |
-  Are you the grandparent of the child or a representative for the child's parent?
+  Are you the grandparent of the ${children[0].name.first} or a representative for ${children[0].name.first}'s parent?
 field: is_plaintiff_representative
 choices:
   - Parent of mother: user_is_parent_of_the_mother_of_child_yes
@@ -670,7 +671,7 @@ objects:
   - Post_interview_instructions: ALDocument.using(title="Instructions", filename="Complaint_to_Establish_Paternity_next_steps.docx", enabled=True, has_addendum=False)
   - Complaint_to_Establish_Paternity_attachment: ALDocument.using(title="This is a form to establish paternity for a child born out of wedlock.", filename="Complaint_to_Establish_Paternity.pdf", enabled=True, has_addendum=False)
   - Post_interview_instructions: ALDocument.using(title="Instructions", filename="Complaint_to_Establish_Paternity_next_steps.docx", enabled=True, has_addendum=False)
-  - Complaint_to_Establish_Paternity_attachment: ALDocument.using(title="This is a form to establish paternity for a child born out of wedlock.", filename="Complaint_to_Establish_Paternity.pdf", enabled=True, has_addendum=False)
+  - Complaint_to_Establish_Paternity_attachment: ALDocument.using(title="Ask court to determine father.", filename="Complaint_to_Establish_Paternity.pdf", enabled=True, has_addendum=False)
 ---
 objects:
   - al_user_bundle: ALDocumentBundle.using(elements=[Post_interview_instructions,Complaint_to_Establish_Paternity_attachment], filename="Complaint_to_Establish_Paternity_package.pdf", title="All forms to download for your records")
