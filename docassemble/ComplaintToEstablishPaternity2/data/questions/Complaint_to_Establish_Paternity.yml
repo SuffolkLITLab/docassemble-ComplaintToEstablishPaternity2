@@ -64,6 +64,17 @@ code: |
   nav.set_section('review_Complaint_to_Establish_Paternity')
   user_ask_role = 'plaintiff'
   Complaint_to_Establish_Paternity
+  children.gather()
+  children[0].birthdate
+  users.gather()
+  other_parties.gather()
+  plaintiff_relation
+  if plaintiff_relation == 'is_the_mother_or_father_of_child_born_out_of_wedlock_yes':
+    is_plaintiff_mother_or_father
+  if plaintiff_relation == 'is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes':
+    is_plaintiff_guardian_or_custodian
+  if plaintiff_relation == 'is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes':
+    is_plaintiff_representative
   are_parties_currently_married
   if are_parties_currently_married == True:
     redirecting_married_parties
@@ -74,25 +85,15 @@ code: |
   if was_mother_married_300_days_before_birth == True:
     redirecting_married_300_days_before
   set_progress(9.09)
-  users.gather()
   users[0].address.address
   set_progress(18.18)
-  other_parties.gather()
   other_parties[0].address.address
   set_progress(27.27)
-  children.gather()
   children[0].address.address
-  children[0].birthdate
   set_progress(36.36)
   set_parts(subtitle=str(users))
-  plaintiff_relation
   set_progress(45.45)
-  if plaintiff_relation == 'is_the_mother_or_father_of_child_born_out_of_wedlock_yes':
-    is_plaintiff_mother_or_father
-  if plaintiff_relation == 'is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes':
-    is_plaintiff_guardian_or_custodian
-  if plaintiff_relation == 'is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes':
-    is_plaintiff_representative
+
   defendant_relation
   set_progress(54.55)
   is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
@@ -154,17 +155,17 @@ question: |
   Who can and cannot file
 subquestion: |
   Enter info
---- 
+---
 id: redirecting_married_parties
 event: redirecting_married_parties
 question: |
-  This is not the correct form
+  We cannot help you
 subquestion: |
   For more information: [Information on Establishing Paternity in court](https://www.masslegalhelp.org/children-and-families/establishing-paternity)
 ---
 id: are_parties_married
 question: |
-  Are the Plaintiff and Defendant currently married?
+  Are the ${users[0].name.first} and ${other_parties[0].name.first} currently married?
 fields: 
   - no label: are_parties_currently_married
     datatype: yesnoradio
@@ -172,7 +173,7 @@ fields:
 id: redirecting_married_at_birth
 event: redirecting_married_at_birth
 question: |
-  This is not the correct form
+  We cannot help you
 subquestion: |
   For more information: [Information on Establishing Paternity in court](https://www.masslegalhelp.org/children-and-families/establishing-paternity)
 ---
@@ -186,7 +187,7 @@ fields:
 id: redirecting_married_300_days_before
 event: redirecting_married_300_days_before
 question: |
-  This is not the correct form
+  We cannot help you
 subquestion: |
   For more information: [Information on Establishing Paternity in court](https://www.masslegalhelp.org/children-and-families/establishing-paternity)
 ---
@@ -204,8 +205,7 @@ subquestion: |
   Note the following documents will need to be filed along with this Complaint form:
   
   - A copy of the child's birth certificate
-  - Affidavit of Care and Custody (Form 
-    available at the courthouse)
+  - [Affidavit Disclosing Care or Custody](https://www.mass.gov/doc/affidavit-disclosing-care-or-custody-proceeding-ocaj-1-trc-iv/download)
     
   Note: You must file a separate complaint for **each** child.
   
@@ -215,10 +215,11 @@ continue button field: Complaint_to_Establish_Paternity
 id: Affidavit_form
 continue button field: Affidavit_of_indigencey
 question: |
- Waiving your court fee's.
+ Waiving your court fee
 subquestion: |
- The court can also waive or ask the state to pay for “extra” fees. You must fill out a form called an Affidavit of Indigency. This form tells the court you cannot afford the fees related to your case. If the clerk or a judge approves the form, you will not have to pay.
-  Refer to the following link (it will re-direct you the MassLegalHelp page that has the information of a fee form waiver). [Affidavit of Indigency](https://courtformsonline.org/other/#indigency)
+ The court can waive or ask the state to pay for “extra” fees. This means you will not have to pay court fees if approved.
+  
+ Refer to the following link (it will re-direct you the MassLegalHelp page that has the information of a fee form waiver). [Affidavit of Indigency](https://courtformsonline.org/other/#indigency)
 ---
 id: plaintiff_relationship_to_child
 question: | 
