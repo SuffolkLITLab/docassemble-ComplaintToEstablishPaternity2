@@ -155,13 +155,6 @@ question: |
   Who can and cannot file
 subquestion: |
   Enter info
---- 
-id: child_not_yet_born
-question: |
-  If the child is not yet born, only the **biological** mother may continue to fill out the form.
-fields:
-  - Birthdate: children[0].birthdate
-    datatype: date
 ---
 id: redirecting_married_parties
 event: redirecting_married_parties
@@ -212,8 +205,7 @@ subquestion: |
   Note the following documents will need to be filed along with this Complaint form:
   
   - A copy of the child's birth certificate
-  - Affidavit of Care and Custody (Form 
-    available at the courthouse)
+  - [Affidavit Disclosing Care or Custody](https://www.mass.gov/doc/affidavit-disclosing-care-or-custody-proceeding-ocaj-1-trc-iv/download)
     
   Note: You must file a separate complaint for **each** child.
   
@@ -223,10 +215,11 @@ continue button field: Complaint_to_Establish_Paternity
 id: Affidavit_form
 continue button field: Affidavit_of_indigencey
 question: |
- Waiving your court fee's.
+ Waiving your court fee
 subquestion: |
- The court can also waive or ask the state to pay for “extra” fees. You must fill out a form called an Affidavit of Indigency. This form tells the court you cannot afford the fees related to your case. If the clerk or a judge approves the form, you will not have to pay.
-  Refer to the following link (it will re-direct you the MassLegalHelp page that has the information of a fee form waiver). [Affidavit of Indigency](https://courtformsonline.org/other/#indigency)
+ The court can waive or ask the state to pay for “extra” fees. This means you will not have to pay court fees if approved.
+  
+ Refer to the following link (it will re-direct you the MassLegalHelp page that has the information of a fee form waiver). [Affidavit of Indigency](https://courtformsonline.org/other/#indigency)
 ---
 id: plaintiff_relationship_to_child
 question: | 
