@@ -75,7 +75,10 @@ code: |
     is_mother_of_child_born_out_of_wedlock_yes
     is_father_of_child_born_out_of_wedlock_yes
   if plaintiff_relation == 'guardian or custodian':
-    is_plaintiff_guardian_or_custodian
+    is_plaintiff_guardian_or_custodian_variable
+    is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
+    is_custodian_of_child_born_out_of_wedlock_yes
+    is_guardian_of_child_born_out_of_wedlock_yes
   if plaintiff_relation == 'representative':
     is_plaintiff_representative
   are_parties_currently_married
@@ -279,6 +282,31 @@ field: is_plaintiff_guardian_or_custodian
 choices: 
   - Guardian: guardian value
   - Custodian: custodian value
+---
+id: Plaintiff guardian/custodian relation
+question: |
+  Are you the guardian or custodian of ${children[0].name.first}?
+field: is_plaintiff_guardian_or_custodian_variable
+choices: 
+  - Guardian: guardian 
+  - Custodian: custodian 
+---
+code: |
+  if plaintiff_relation == 'guardian or custodian':
+    is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes = True
+  else: 
+    is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes = False
+---
+code: |
+  if is_plaintiff_guardian_or_custodian_variable == 'guardian':
+    is_guardian_of_child_born_out_of_wedlock_yes = True
+    is_custodian_of_child_born_out_of_wedlock_yes = False
+  elif is_plaintiff_mother_or_father_variable == 'custodian':
+    is_guardian_of_child_born_out_of_wedlock_yes = False
+    is_custodian_of_child_born_out_of_wedlock_yes = True
+  else: 
+    is_custodian_of_child_born_out_of_wedlock_yes = False
+    is_guardian_of_child_born_out_of_wedlock_yes = False
 ---
 id: Plaintiff relation as representative 
 question: |
