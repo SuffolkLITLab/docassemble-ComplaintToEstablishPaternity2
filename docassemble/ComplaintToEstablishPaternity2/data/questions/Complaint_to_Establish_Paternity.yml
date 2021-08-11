@@ -100,7 +100,11 @@ code: |
   set_parts(subtitle=str(users))
   set_progress(45.45)
 
-  defendant_relation
+  defendant_relation_variable
+  if defendant_relation_variable == 'mother':
+    is_other_party_mother_of_child_yes
+  if defendant_relation_variable == 'father':
+    is_other_party_father_of_child_yes
   set_progress(54.55)
   is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
   is_to_order_suitable_amount_of_child_support_yes
@@ -331,10 +335,18 @@ fields:
 id: Defendant Opposing party Relation
 question: |
   What is ${other_parties[0].name.first}'s relationship to ${children[0].name.first}.
-field: defendant_relation
+field: defendant_relation_variable
 choices:
-  - Mother: is_other_party_mother_of_child_yes
-  - Father: is_other_party_father_of_child_yes
+  - Mother: mother
+  - Father: father
+---
+code: |
+  if defendant_relation_variable == 'mother':
+    is_other_party_mother_of_child_yes = True
+    is_other_party_father_of_child_yes = False
+  elif defendant_relation_variable == 'father':
+    is_other_party_mother_of_child_yes = True
+    is_other_party_father_of_child_yes = False    
 ---
 id: Plaintiff request to adjudicate
 question: |
