@@ -85,6 +85,8 @@ code: |
     is_parent_of_parent_of_child_born_out_of_wedlock_yes
     user_is_parent_of_the_mother_of_child_yes
     user_is_the_parent_of_father_of_child_yes
+    is_representative_of_parent_of_child_born_out_of_wedlock_yes
+    
   are_parties_currently_married
   if are_parties_currently_married == True:
     redirecting_married_parties
@@ -112,7 +114,11 @@ code: |
   set_progress(54.55)
   is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes = False
   is_to_order_suitable_amount_of_child_support_yes
-  is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
+  is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes_variable
+  if is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes_variable == 'user party':
+    is_asking_other_party_provide_health_insurance_yes
+  if is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes_variable == 'other party':
+    is_asking_other_party_provide_health_insurance_yes
   is_asking_to_prohibit_other_party_from_imposing_restraint_yes
   is_asking_grant_user_or_other_party_custody_yes
   set_progress(63.64)
@@ -348,13 +354,17 @@ code: |
     user_is_parent_of_the_mother_of_child_yes = True
     is_parent_of_parent_of_child_born_out_of_wedlock_yes = True
     user_is_the_parent_of_father_of_child_yes = False
+    is_representative_of_parent_of_child_born_out_of_wedlock_yes = False
   elif is_plaintiff_representative_variable == 'fathers parent':
     user_is_parent_of_the_mother_of_child_yes = False
     is_parent_of_parent_of_child_born_out_of_wedlock_yes = True
     user_is_the_parent_of_father_of_child_yes = True
+    is_representative_of_parent_of_child_born_out_of_wedlock_yes = False
   else: 
     user_is_parent_of_the_mother_of_child_yes = False
     user_is_the_parent_of_father_of_child_yes = False  
+    is_representative_of_parent_of_child_born_out_of_wedlock_yes = False
+    is_parent_of_parent_of_child_born_out_of_wedlock_yes = False
 ---
 sets:
   - other_parties[i].name.first
@@ -408,6 +418,27 @@ choices:
   - To maintain insurance: is_asking_to_maintain_insurance_yes
   - To provide health insurance: is_asking_to_provide_health_yes
   - No: nope
+---
+id: Plaintiff requesting to maintain/provide insurance
+question: |
+  Are you requesting an order for the defendant to maintain or provide insurance?
+field: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes_variable
+choices:
+  - Ask ${users[0].name.first} for insurance: user party
+  - Ask ${other_parties[0].name.first} to provide health insurance: other party
+  - No: nope
+---
+code: |
+  if is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes_variable == 'user party':
+    is_asking_user_to_maintain_or_provide_insurance_yes = True
+    is_asking_other_party_provide_health_insurance_yes = False
+  elif is_plaintiff_mother_or_father_variable == 'other party':
+    is_asking_user_to_maintain_or_provide_insurance_yes = True
+    is_asking_other_party_provide_health_insurance_yes = False
+  else: 
+    is_asking_user_to_maintain_or_provide_insurance_yes = False
+    is_asking_other_party_provide_health_insurance_yes = False
+---
 ---
 id: Plaintiff requesting prohibit restraint
 question: |
