@@ -133,6 +133,8 @@ code: |
   if is_asking_grant_user_or_other_party_custody_yes == 'other custody':
     is_asking_to_grant_other_party_custody_yes
     is_asking_grant_user_or_other_party_custody_yes
+  
+  
   set_progress(63.64)
   signature_date
   pro_se_or_atty = 'prose'
@@ -496,9 +498,17 @@ question: |
   Are you requesting parenting time?
 field: is_asking_grant_user_or_other_party_parenting_time_yes
 choices:
-  - Grant ${users[0].name.first} parenting time: is_asking_grant_user_parenting_time_yes
-  - Grant ${other_parties[0].name.first} parenting time: is_asking_grant_other_party_parenting_time_yes
+  - Grant ${users[0].name.first} parenting time: 'user parenting time' 
+  - Grant ${other_parties[0].name.first} parenting time: 'other party parenting time' 
   - No: nope
+---
+code: |
+  if is_asking_grant_user_or_other_party_parenting_time_yes == 'user parenting time':
+    is_asking_grant_user_parenting_time_yes = True
+    is_asking_grant_other_party_parenting_time_yes = False 
+  elif is_asking_grant_user_or_other_party_parenting_time_yes == 'other party parenting time':
+    is_asking_grant_user_parenting_time_yes = False
+    is_asking_grant_other_party_parenting_time_yes = True     
 ---
 id: pro se or atty
 question: | 
