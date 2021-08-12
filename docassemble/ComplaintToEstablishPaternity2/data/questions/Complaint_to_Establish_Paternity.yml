@@ -127,6 +127,12 @@ code: |
     is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
     is_asking_to_prohibit_other_party_from_imposing_restraint_yes
   is_asking_grant_user_or_other_party_custody_yes
+  if is_asking_grant_user_or_other_party_custody_yes == 'user custody':
+    is_asking_to_grant_user_custody_yes
+    is_asking_grant_user_or_other_party_custody_yes
+  if is_asking_grant_user_or_other_party_custody_yes == 'other custody':
+    is_asking_to_grant_other_party_custody_yes
+    is_asking_grant_user_or_other_party_custody_yes
   set_progress(63.64)
   signature_date
   pro_se_or_atty = 'prose'
@@ -259,7 +265,6 @@ choices:
   - Guardian or custodian: is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
   - Representative for parent: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
   - The child: is_a_child_born_out_of_wedlock_yes
----
 ---
 id: plaintiff_relationship_to_child
 question: | 
@@ -445,7 +450,6 @@ code: |
     is_asking_user_to_maintain_or_provide_insurance_yes = False
     is_asking_other_party_provide_health_insurance_yes = False
 ---
----
 id: Plaintiff requesting prohibit restraint
 question: |
   Are you prohibiting a party from imposing restraint?
@@ -470,9 +474,22 @@ question: |
   Are you requesting custody?
 field: is_asking_grant_user_or_other_party_custody_yes
 choices:
-  - Grant ${users[0].name.first} custody: is_asking_to_grant_user_custody_yes
-  - Grant ${other_parties[0].name.first} custody: is_asking_to_grant_other_party_custody_yes
+  - Grant ${users[0].name.first} custody: 'user custody'
+  - Grant ${other_parties[0].name.first} custody: 'other custody'
   - No: nope
+---
+code: |
+  if is_asking_grant_user_or_other_party_custody_yes == 'user custody':
+    is_asking_to_grant_user_custody_yes = True
+    is_asking_to_grant_other_party_custody_yes = False
+    is_asking_grant_user_or_other_party_custody_yes = True
+  elif is_asking_grant_user_or_other_party_custody_yes == 'other custody':
+    is_asking_to_grant_user_custody_yes = False
+    is_asking_to_grant_other_party_custody_yes = True
+    is_asking_grant_user_or_other_party_custody_yes = True
+  else:
+    is_asking_to_grant_user_custody_yes = False
+    is_asking_to_grant_other_party_custody_yes = False    
 ---
 id: Plaintiff requesting parenting time
 question: |
