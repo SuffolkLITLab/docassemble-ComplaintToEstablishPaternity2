@@ -110,7 +110,7 @@ code: |
   if defendant_relation_variable == 'father':
     is_other_party_father_of_child_yes
   set_progress(54.55)
-  is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes
+  is_adjudicate_the_user_or_other_party_to_be_father_of_child_yes = False
   is_to_order_suitable_amount_of_child_support_yes
   is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes
   is_asking_to_prohibit_other_party_from_imposing_restraint_yes
@@ -257,7 +257,6 @@ choices:
   - Biological Parent: parent
   - Guardian or custodian: guardian or custodian
   - Representative for parent: representative
-  - The child: child
 ---
 --- 
 id: Plaintiff parent relation to the Child
