@@ -120,6 +120,12 @@ code: |
   if is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes_variable == 'other party':
     is_asking_other_party_provide_health_insurance_yes
   is_asking_to_prohibit_other_party_from_imposing_restraint_yes
+  if is_asking_to_prohibit_other_party_from_imposing_restraint_yes == 'prohibit on user': 
+    is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes
+    is_asking_to_prohibit_other_party_from_imposing_restraint_yes
+  if is_asking_to_prohibit_other_party_from_imposing_restraint_yes == 'prohibit child':
+    is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
+    is_asking_to_prohibit_other_party_from_imposing_restraint_yes
   is_asking_grant_user_or_other_party_custody_yes
   set_progress(63.64)
   signature_date
@@ -432,7 +438,7 @@ code: |
   if is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes_variable == 'user party':
     is_asking_user_to_maintain_or_provide_insurance_yes = True
     is_asking_other_party_provide_health_insurance_yes = False
-  elif is_plaintiff_mother_or_father_variable == 'other party':
+  elif is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes_variable == 'other party':
     is_asking_user_to_maintain_or_provide_insurance_yes = True
     is_asking_other_party_provide_health_insurance_yes = False
   else: 
@@ -445,10 +451,19 @@ question: |
   Are you prohibiting a party from imposing restraint?
 field: is_asking_to_prohibit_other_party_from_imposing_restraint_yes
 choices: 
-  - Prohibit ${other_parties[0].name.first} from imposing restraint on ${users[0].name.first}: is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes
-  - Prohibit ${other_parties[0].name.first} from imposing restraint on ${children[0].name.first}: is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
+  - Prohibit ${other_parties[0].name.first} from imposing restraint on ${users[0].name.first}: 'prohibit on user'
+  - Prohibit ${other_parties[0].name.first} from imposing restraint on ${children[0].name.first}: 'prohibit on child'
   - No: nope
-  
+---
+code: |
+  if is_asking_to_prohibit_other_party_from_imposing_restraint_yes == 'prohibit on user':
+    is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes = True 
+    is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes = False
+    is_asking_to_prohibit_other_party_from_imposing_restraint_yes = True
+  elif is_asking_to_prohibit_other_party_from_imposing_restraint_yes == 'prohibit on child':
+    is_asking_to_prohibit_other_party_from_imposing_restraint_on_user_yes = False
+    is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes = True
+    is_asking_to_prohibit_other_party_from_imposing_restraint_yes = True
 ---
 id: Plaintiff requesting to grant custody
 question: |
