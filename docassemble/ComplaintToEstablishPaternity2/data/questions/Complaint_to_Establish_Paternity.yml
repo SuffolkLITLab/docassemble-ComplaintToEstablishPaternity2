@@ -80,7 +80,11 @@ code: |
     is_custodian_of_child_born_out_of_wedlock_yes
     is_guardian_of_child_born_out_of_wedlock_yes
   if plaintiff_relation == 'representative':
-    is_plaintiff_representative
+    is_plaintiff_representative_variable
+    is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
+    is_parent_of_parent_of_child_born_out_of_wedlock_yes
+    user_is_parent_of_the_mother_of_child_yes
+    user_is_the_parent_of_father_of_child_yes
   are_parties_currently_married
   if are_parties_currently_married == True:
     redirecting_married_parties
@@ -148,6 +152,8 @@ terms:
      Adjudication is the formal recognition of an alleged father as the legal father of a child born to unmarried parents. Prior to an adjudication, an alleged father has no rights to a child.
   child support: |
       Child support refers to regular payments made to one parent by the other for the financial benefit of the children.
+  custodian: |
+  guardian: |
 ---
 comment: |
   This question is used to introduce your interview. Please customize
@@ -170,7 +176,7 @@ subquestion: |
 id: redirecting_married_parties
 event: redirecting_married_parties
 question: |
-  We cannot help you
+  We cannot help you at this time
 subquestion: |
   For more information: [Information on Establishing Paternity in court](https://www.masslegalhelp.org/children-and-families/establishing-paternity)
 ---
@@ -184,7 +190,7 @@ fields:
 id: redirecting_married_at_birth
 event: redirecting_married_at_birth
 question: |
-  We cannot help you
+  We cannot help you at this time
 subquestion: |
   For more information: [Information on Establishing Paternity in court](https://www.masslegalhelp.org/children-and-families/establishing-paternity)
 ---
@@ -204,7 +210,7 @@ subquestion: |
 ---
 id: married_300_days_before_birth
 question: |
-  Was the mother married 300 days **before** ${children[0].name.first}'s birth?
+  Was the biological mother married 300 days **before** ${children[0].name.first}'s birth?
 fields:
   - no label: was_mother_married_300_days_before_birth
     datatype: yesnoradio
@@ -248,7 +254,7 @@ question: |
   What is your relationship to ${children[0].name.first}? 
 field: plaintiff_relation
 choices:
-  - Parent: parent
+  - Biological Parent: parent
   - Guardian or custodian: guardian or custodian
   - Representative for parent: representative
   - The child: child
@@ -256,7 +262,7 @@ choices:
 --- 
 id: Plaintiff parent relation to the Child
 question: |
-  Are you the mother or father of ${children[0].name.first}?
+  Are you the biological mother or biological father of ${children[0].name.first}?
 field: is_plaintiff_mother_or_father_variable
 choices:
   - Mother: mother
@@ -321,6 +327,35 @@ choices:
   - Parent of father: user_is_the_parent_of_father_of_child_yes
   - Personal representative for mother: is_representative_of_parent_of_child_born_out_of_wedlock_yes
   - Personal representative for father: is_representative_of_parent_of_child_born_out_of_wedlock_yes
+---
+id: Plaintiff relation as representative 
+question: |
+  Are you the grandparent of the ${children[0].name.first} or a representative for ${children[0].name.first}'s parent?
+field: is_plaintiff_representative_variable
+choices:
+  - Parent of mother: mothers parent
+  - Parent of father: fathers parent
+  - Personal representative for mother: mothers rep
+  - Personal representative for father: fathers rep 
+---
+code: |
+  if plaintiff_relation == 'representative':
+    is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes = True
+  else: 
+    is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes = False
+---
+code: |
+  if is_plaintiff_representative_variable == 'mothers parent':
+    user_is_parent_of_the_mother_of_child_yes = True
+    is_parent_of_parent_of_child_born_out_of_wedlock_yes = True
+    user_is_the_parent_of_father_of_child_yes = False
+  elif is_plaintiff_representative_variable == 'fathers parent':
+    user_is_parent_of_the_mother_of_child_yes = False
+    is_parent_of_parent_of_child_born_out_of_wedlock_yes = True
+    user_is_the_parent_of_father_of_child_yes = True
+  else: 
+    user_is_parent_of_the_mother_of_child_yes = False
+    user_is_the_parent_of_father_of_child_yes = False  
 ---
 sets:
   - other_parties[i].name.first
