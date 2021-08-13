@@ -173,7 +173,9 @@ terms:
   child support: |
       Child support refers to regular payments made to one parent by the other for the financial benefit of the children.
   custodian: |
-  guardian: |
+      Legal custodian means a person, other than a parent or guardian, or an agency to whom legal custody of a child has been transferred by a court, but does not include a person who has only physical custody of a child.
+  legal guardian: |
+      Legal guardianship is given the court, giving responsibility over decisions of the child. 
 ---
 comment: |
   This question is used to introduce your interview. Please customize
@@ -182,7 +184,7 @@ continue button field: Complaint_to_Establish_Paternity_intro
 question: |
   Complaint to Establish Paternity
 subquestion: |
-  This is a form to establish {paternity} for a child born out of wedlock. This form is for those who want to establish a legal relationship between a father and his child.
+  This is a form to establish {paternity} for a child born out of wedlock. For those who want to establish a legal relationship between a father and his child.
   
   If the father is already legally established, you **do not** need this form.
 --- 
@@ -241,7 +243,7 @@ question: |
 subquestion: |
   Note the following documents will need to be filed along with this Complaint form:
   
-  - A copy of the child's birth certificate
+  - A copy of the child's birth certificate **OR** [Motion for Generic Marker Testing form](https://www.masslegalhelp.org/children-and-families/forms/motion-affidavit-proposed-order-for-gmt-sample.pdf)
   - [Affidavit Disclosing Care or Custody](https://www.mass.gov/doc/affidavit-disclosing-care-or-custody-proceeding-ocaj-1-trc-iv/download)
     
   Note: You must file a separate complaint for **each** child.
@@ -313,7 +315,7 @@ choices:
 ---
 id: Plaintiff guardian/custodian relation
 question: |
-  Are you the guardian or custodian of ${children[0].name.first}?
+  Are you the {legal guardian} or {custodian} of ${children[0].name.first}?
 field: is_plaintiff_guardian_or_custodian_variable
 choices: 
   - Guardian: guardian 
