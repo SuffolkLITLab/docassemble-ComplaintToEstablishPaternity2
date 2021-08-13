@@ -127,6 +127,14 @@ code: |
     is_asking_to_prohibit_other_party_from_imposing_restraint_on_child_yes
     is_asking_to_prohibit_other_party_from_imposing_restraint_yes
   is_asking_grant_user_or_other_party_custody_yes
+  if is_asking_grant_user_or_other_party_custody_yes == 'user custody':
+    is_asking_to_grant_user_custody_yes
+    is_asking_grant_user_or_other_party_custody_yes
+  if is_asking_grant_user_or_other_party_custody_yes == 'other custody':
+    is_asking_to_grant_other_party_custody_yes
+    is_asking_grant_user_or_other_party_custody_yes
+  
+  
   set_progress(63.64)
   signature_date
   pro_se_or_atty = 'prose'
@@ -165,7 +173,9 @@ terms:
   child support: |
       Child support refers to regular payments made to one parent by the other for the financial benefit of the children.
   custodian: |
-  guardian: |
+      Legal custodian means a person, other than a parent or guardian, or an agency to whom legal custody of a child has been transferred by a court, but does not include a person who has only physical custody of a child.
+  legal guardian: |
+      Legal guardianship is given the court, giving responsibility over decisions of the child. 
 ---
 comment: |
   This question is used to introduce your interview. Please customize
@@ -174,7 +184,7 @@ continue button field: Complaint_to_Establish_Paternity_intro
 question: |
   Complaint to Establish Paternity
 subquestion: |
-  This is a form to establish {paternity} for a child born out of wedlock. This form is for those who want to establish a legal relationship between a father and his child.
+  This is a form to establish {paternity} for a child born out of wedlock. For those who want to establish a legal relationship between a father and his child.
   
   If the father is already legally established, you **do not** need this form.
 --- 
@@ -233,7 +243,7 @@ question: |
 subquestion: |
   Note the following documents will need to be filed along with this Complaint form:
   
-  - A copy of the child's birth certificate
+  - A copy of the child's birth certificate **OR** [Motion for Generic Marker Testing form](https://www.masslegalhelp.org/children-and-families/forms/motion-affidavit-proposed-order-for-gmt-sample.pdf)
   - [Affidavit Disclosing Care or Custody](https://www.mass.gov/doc/affidavit-disclosing-care-or-custody-proceeding-ocaj-1-trc-iv/download)
     
   Note: You must file a separate complaint for **each** child.
@@ -259,7 +269,6 @@ choices:
   - Guardian or custodian: is_the_guardian_or_custodian_of_a_child_born_out_of_wedlock_yes
   - Representative for parent: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
   - The child: is_a_child_born_out_of_wedlock_yes
----
 ---
 id: plaintiff_relationship_to_child
 question: | 
@@ -306,7 +315,7 @@ choices:
 ---
 id: Plaintiff guardian/custodian relation
 question: |
-  Are you the guardian or custodian of ${children[0].name.first}?
+  Are you the {legal guardian} or {custodian} of ${children[0].name.first}?
 field: is_plaintiff_guardian_or_custodian_variable
 choices: 
   - Guardian: guardian 
@@ -445,7 +454,6 @@ code: |
     is_asking_user_to_maintain_or_provide_insurance_yes = False
     is_asking_other_party_provide_health_insurance_yes = False
 ---
----
 id: Plaintiff requesting prohibit restraint
 question: |
   Are you prohibiting a party from imposing restraint?
@@ -470,18 +478,39 @@ question: |
   Are you requesting custody?
 field: is_asking_grant_user_or_other_party_custody_yes
 choices:
-  - Grant ${users[0].name.first} custody: is_asking_to_grant_user_custody_yes
-  - Grant ${other_parties[0].name.first} custody: is_asking_to_grant_other_party_custody_yes
+  - Grant ${users[0].name.first} custody: 'user custody'
+  - Grant ${other_parties[0].name.first} custody: 'other custody'
   - No: nope
+---
+code: |
+  if is_asking_grant_user_or_other_party_custody_yes == 'user custody':
+    is_asking_to_grant_user_custody_yes = True
+    is_asking_to_grant_other_party_custody_yes = False
+    is_asking_grant_user_or_other_party_custody_yes = True
+  elif is_asking_grant_user_or_other_party_custody_yes == 'other custody':
+    is_asking_to_grant_user_custody_yes = False
+    is_asking_to_grant_other_party_custody_yes = True
+    is_asking_grant_user_or_other_party_custody_yes = True
+  else:
+    is_asking_to_grant_user_custody_yes = False
+    is_asking_to_grant_other_party_custody_yes = False    
 ---
 id: Plaintiff requesting parenting time
 question: |
   Are you requesting parenting time?
 field: is_asking_grant_user_or_other_party_parenting_time_yes
 choices:
-  - Grant ${users[0].name.first} parenting time: is_asking_grant_user_parenting_time_yes
-  - Grant ${other_parties[0].name.first} parenting time: is_asking_grant_other_party_parenting_time_yes
+  - Grant ${users[0].name.first} parenting time: 'user parenting time' 
+  - Grant ${other_parties[0].name.first} parenting time: 'other party parenting time' 
   - No: nope
+---
+code: |
+  if is_asking_grant_user_or_other_party_parenting_time_yes == 'user parenting time':
+    is_asking_grant_user_parenting_time_yes = True
+    is_asking_grant_other_party_parenting_time_yes = False 
+  elif is_asking_grant_user_or_other_party_parenting_time_yes == 'other party parenting time':
+    is_asking_grant_user_parenting_time_yes = False
+    is_asking_grant_other_party_parenting_time_yes = True     
 ---
 id: pro se or atty
 question: | 
