@@ -46,7 +46,7 @@ code: |
   al_form_type = 'other'
 ---
 objects:
-  - user_or_attorney: ALPeopleList.using(ask_number=True,target_number=1)
+  #- user_or_attorney: ALPeopleList.using(ask_number=True,target_number=1)
   - users: ALPeopleList.using(there_are_any=True,target_number=1,ask_number=True)
   - other_parties: ALPeopleList.using(there_are_any=True,target_number=1,ask_number=True)
   - children: ALPeopleList.using(there_are_any=True,target_number=1,ask_number=True)
@@ -138,11 +138,6 @@ code: |
   set_progress(63.64)
   signature_date
   pro_se_or_atty = 'prose'
-  if pro_se_or_atty == 'attorney':
-    user_or_attorney.gather()
-    user_or_attorney[0].address.address
-    attorney_bbo
-    user_or_attorney[0].phone_number
   trial_court.division
   set_progress(72.73)
   Affidavit_of_indigencey
@@ -162,7 +157,6 @@ code: |
   store_variables_snapshot(data={'zip': users[0].address.zip})
   Complaint_to_Establish_Paternity_preview_question
   basic_questions_signature_flow
-  user_or_attorney[0].signature
   Complaint_to_Establish_Paternity_download
 ---
 terms: 
@@ -540,7 +534,7 @@ subquestion: |
   
   
   
-  ${ user_or_attorney[0] if pro_se_or_atty == 'attorney' else users[0].name }
+  ${ users[0].name }
   
   
   
@@ -553,7 +547,7 @@ subquestion: |
 continue button field: Complaint_to_Establish_Paternity_preview_question    
 ---
 code: |
-  signature_fields = ['user_or_attorney[0].signature']
+  signature_fields = ['users[0].signature']
 ---
 id: Complaint to Establish Paternity review screen
 event: review_Complaint_to_Establish_Paternity
@@ -802,33 +796,6 @@ edit:
 confirm: True
 
 ---
-continue button field: user_or_attorney.revisit
-question: |
-  Edit user_or_attorney
-subquestion: |
-  ${ user_or_attorney.table }
-
-  ${ user_or_attorney.add_action() }
----
-table: user_or_attorney.table
-rows: user_or_attorney
-columns:
-  - address: |
-      row_item.address.block() if defined("row_item.address.address") else ""
-  - phone_number: |
-      row_item.phone_number if defined("row_item.phone_number") else ""
-  - name: |
-      row_item.name.full() if defined("row_item.name.first") else ""
-  - signature: |
-      row_item.signature if defined("row_item.signature") else ""
-edit:
-  - address.address
-  - phone_number
-  - name.first
-  - signature
-confirm: True
-
----
 id: download Complaint_to_Establish_Paternity
 event: Complaint_to_Establish_Paternity_download
 question: |
@@ -898,47 +865,19 @@ attachments:
       - "other_party_address_state": ${ other_parties[0].address.state }
       - "other_party_address_zip": ${ other_parties[0].address.zip }
       - "signature_date": ${ signature_date }
-      - "user_or_attorney_address_unit": |
-          % if pro_se_or_atty == 'attorney': 
-          ${ user_or_attorney[0].address.unit }
-          % else:
-          ${ users[0].address.unit }
-          % endif
-      - "user_or_attorney_phone_number": |
-          % if pro_se_or_atty == 'attorney': 
-          ${ user_or_attorney[0].phone_number }
-          % endif
-      - "user_or_attorney_name": |
-          % if pro_se_or_atty == 'attorney': 
-          ${ user_or_attorney[0] }
-          % else:
-          ${ users[0].name }
-          % endif
-      - "user_or_attorney_address_city": |
-          % if pro_se_or_atty == 'attorney': 
-          ${ user_or_attorney[0].address.city }
-          % else:
-          ${ users[0].address.city }
-          % endif
-      - "user_or_attorney_address_zip": |
-          % if pro_se_or_atty == 'attorney': 
-          ${ user_or_attorney[0].address.zip }
-          % else:
-          ${ users[0].address.zip }
-          % endif
-      - "user_or_attorney_address_state": |
-          % if pro_se_or_atty == 'attorney': 
-          ${ user_or_attorney[0].address.state }
-          % else:
-          ${ users[0].address.state }
-          % endif
-      - "user_or_attorney_address_street": |
-          % if pro_se_or_atty == 'attorney': 
-          ${ user_or_attorney[0].address.address }
-          % else:
-          ${ users[0].address.address }
-          % endif
-      - "user_or_attorney_signature": ${ user_or_attorney[0].signature_if_final(i) }
+      - "user_or_attorney_address_unit": ${ users[0].address.unit }
+
+      - "user_or_attorney_phone_number": ${ user[0].phone_numbers() }
+
+      - "user_or_attorney_name": ${ users[0].name }
+
+      - "user_or_attorney_address_city": ${ users[0].address.city }
+
+      - "user_or_attorney_address_zip": ${ users[0].address.zip }
+      - "user_or_attorney_address_state": ${ users[0].address.state }
+      - "user_or_attorney_address_street": ${ users[0].address.address }
+
+      - "user_or_attorney_signature": ${ users[0].signature_if_final(i) }
       - "is_the_mother_or_father_of_child_born_out_of_wedlock_yes": ${ is_the_mother_or_father_of_child_born_out_of_wedlock_yes }
       - "is_mother_of_child_born_out_of_wedlock_yes": ${ is_mother_of_child_born_out_of_wedlock_yes }
       - "is_father_of_child_born_out_of_wedlock_yes": ${ is_father_of_child_born_out_of_wedlock_yes }
@@ -971,4 +910,4 @@ attachments:
       - "is_asking_grant_user_or_other_party_parenting_time_yes": ${ is_asking_grant_user_or_other_party_parenting_time_yes }
       - "is_asking_grant_user_parenting_time_yes": ${ is_asking_grant_user_parenting_time_yes }
       - "is_asking_grant_other_party_parenting_time_yes": ${ is_asking_grant_other_party_parenting_time_yes }
-      - "attorney_bbo": ${ attorney_bbo }
+     # - "attorney_bbo": ${ attorney_bbo }
