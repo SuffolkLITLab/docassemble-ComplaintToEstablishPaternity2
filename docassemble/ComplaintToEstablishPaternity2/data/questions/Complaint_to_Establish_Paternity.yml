@@ -243,8 +243,8 @@ question: |
 subquestion: |
   Note the following documents will need to be filed along with this Complaint form:
   
-  - A copy of the child's birth certificate **OR** [Motion for Generic Marker Testing form](https://www.masslegalhelp.org/children-and-families/forms/motion-affidavit-proposed-order-for-gmt-sample.pdf)
-  - [Affidavit Disclosing Care or Custody](https://www.mass.gov/doc/affidavit-disclosing-care-or-custody-proceeding-ocaj-1-trc-iv/download)
+  - A copy of the child's birth certificate **OR** [Motion for Genetic Marker Testing form](https://www.masslegalhelp.org/sites/default/files/2024-03/motion-affidavit-proposed-order-for-gmt-sample.pdf)
+  - [Affidavit Disclosing Care or Custody](https://www.mass.gov/doc/child-care-or-custody-disclosure-affidavit/download)
     
   Note: You must file a separate complaint for **each** child.
   
@@ -258,7 +258,7 @@ question: |
 subquestion: |
  The court can waive or ask the state to pay for “extra” fees. This means you will not have to pay court fees if approved.
   
- Refer to the following link (it will re-direct you the MassLegalHelp page that has the information of a fee form waiver). [Affidavit of Indigency](https://courtformsonline.org/other/#indigency)
+ Learn about requesting a waiver of court fees: [Affidavit of Indigency](https://www.mass.gov/indigency-waiver-of-court-fees)
 ---
 id: plaintiff_relationship_to_child
 question: | 
@@ -270,7 +270,7 @@ choices:
   - Representative for parent: is_the_parent_or_representative_of_the_parent_of_the_child_born_out_of_wedlock_yes
   - The child: is_a_child_born_out_of_wedlock_yes
 ---
-id: plaintiff_relationship_to_child
+id: "plaintiff_relationship_to_child 2"
 question: | 
   What is your relationship to ${children[0].name.first}? 
 field: plaintiff_relation
@@ -313,7 +313,7 @@ choices:
   - Guardian: guardian value
   - Custodian: custodian value
 ---
-id: Plaintiff guardian/custodian relation
+id: "Plaintiff guardian/custodian relation 2"
 question: |
   Are you the {legal guardian} or {custodian} of ${children[0].name.first}?
 field: is_plaintiff_guardian_or_custodian_variable
@@ -348,7 +348,7 @@ choices:
   - Personal representative for mother: is_representative_of_parent_of_child_born_out_of_wedlock_yes
   - Personal representative for father: is_representative_of_parent_of_child_born_out_of_wedlock_yes
 ---
-id: Plaintiff relation as representative 
+id: "Plaintiff relation as representative 2"
 question: |
   Are you the grandparent of the ${children[0].name.first} or a representative for ${children[0].name.first}'s parent?
 field: is_plaintiff_representative_variable
@@ -434,7 +434,7 @@ choices:
   - To provide health insurance: is_asking_to_provide_health_yes
   - No: nope
 ---
-id: Plaintiff requesting to maintain/provide insurance
+id: "Plaintiff requesting to maintain/provide insurance 2"
 question: |
   Are you requesting an order for the defendant to maintain or provide insurance?
 field: is_asking_order_the_user_or_other_party_to_maintain_or_provide_insurance_yes_variable
@@ -737,6 +737,7 @@ review:
       % endfor
 ---
 continue button field: users.revisit
+id: "edit users"
 question: |
   Edit users
 subquestion: |
@@ -758,6 +759,7 @@ confirm: True
 
 ---
 continue button field: other_parties.revisit
+id: "edit other parties"
 question: |
   Edit other_parties
 subquestion: |
@@ -779,6 +781,7 @@ confirm: True
 
 ---
 continue button field: children.revisit
+id: "edit children"
 question: |
   Edit children
 subquestion: |
@@ -803,6 +806,7 @@ confirm: True
 
 ---
 continue button field: user_or_attorney.revisit
+id: "edit user or attorney"
 question: |
   Edit user_or_attorney
 subquestion: |
